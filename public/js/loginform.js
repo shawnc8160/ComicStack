@@ -64,6 +64,7 @@ class LoginForm extends React.Component {
   getUser(token) {
     let tokenString = 'Bearer ' + token['jwt']
     console.log('Authorization is:', tokenString);
+    // Need to put token in header, the auth route returns user information
     fetch('/auth', {
       headers: {
         'Content-Type': 'application/json',
