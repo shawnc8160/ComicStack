@@ -10,7 +10,7 @@ class SearchForm extends React.Component {
         fetch('https://comicvine.gamespot.com/api/search/?api_key=4b0e3b0f6a9224f1f5a13f757d9514dc3f387840&format=json&sort=name:asc&query=sandman', {mode: 'no-cors'}).then((response)=>{
         response.json().then((data)=>{
             console.log(data);
-        });
+        }).catch((error) => console.log('error retrieving from comicvine', error));
         });
     }
   getResults () {

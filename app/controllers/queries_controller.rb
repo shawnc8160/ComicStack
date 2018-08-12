@@ -1,5 +1,5 @@
-class PeopleController < ApplicationController
-  skip_before_action :verify_authenticity_token
+class QueriesController < ApplicationController
+  #skip_before_action :verify_authenticity_token
 
   # get one (by id)
   def find
