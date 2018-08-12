@@ -5,9 +5,9 @@ class App extends React.Component {
       searchResults: null,
       user: null
     }
-    this.sendResults = this.sendResults.bind(this)
     this.setUser = this.setUser.bind(this)
     this.getCookieData = this.getCookieData.bind(this)
+    this.grabResults = this.grabResults.bind(this)
   }
   /*=======================
   Things to check for when page first loads
@@ -40,9 +40,7 @@ class App extends React.Component {
       console.log('token does not exist');
     }
   }
-  sendResults(data) {
-    this.state.searchResults
-  }
+
   /*=======================
   Sets user data in state and cookies after log in
   =======================*/
@@ -58,16 +56,30 @@ class App extends React.Component {
       user: userdata
     });
   }
+
+  grabResults(data) {
+    this.setState({
+      searchResults: data.results
+    })
+  }
+
   render () {
     return (
       <div className='section'>
         <h1> ComicStack </h1>
+
         {
           (this.state.user == null)
           ? <User setUser={this.setUser}/>
           : <div>Logged in as {this.state.user.username}</div>
         }
-        <SearchForm sendResults={this.sendResults}/>
+
+        <SearchForm grabResults={this.grabResults}/>
+        {(this.state.searchResults == null)?
+          '' :
+          <Rollout results={this.state.searchResults}></Rollout>
+      }
+
       </div>
     )
   }
