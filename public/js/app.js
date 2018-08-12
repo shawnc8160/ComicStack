@@ -4,17 +4,24 @@ class App extends React.Component {
     this.state = {
       searchResults: null
     }
-    this.sendResults = this.sendResults.bind(this)
+    this.grabResults = this.grabResults.bind(this)
   }
-  sendResults(data) {
-    this.state.searchResults
+
+  grabResults(data) {
+    this.setState({
+      searchResults: data
+    })
   }
 
   render () {
     return (
       <div className='section'>
         <h1> ComicStack </h1>
-        <SearchForm sendResults={this.sendResults}/>
+        <SearchForm grabResults={this.grabResults}/>
+        {(this.state.searchResults == null)?
+          '' :
+          <Rollout results={this.state.searchResults}></Rollout>
+      }
       </div>
     )
   }

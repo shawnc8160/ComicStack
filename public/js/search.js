@@ -1,24 +1,14 @@
 class SearchForm extends React.Component {
   constructor(props) {
     super(props)
-    this.query = this.query.bind(this)
     this.getResults = this.getResults.bind(this)
   }
-  query(event){
-        event.preventDefault();
-        console.log(this.refs.query.value);
-        fetch('https://comicvine.gamespot.com/api/search/?api_key=4b0e3b0f6a9224f1f5a13f757d9514dc3f387840&format=json&sort=name:asc&query=sandman', {mode: 'no-cors'}).then((response)=>{
-        response.json().then((data)=>{
-            console.log(data);
-        }).catch((error) => console.log('error retrieving from comicvine', error));
-        });
-    }
   getResults () {
     event.preventDefault();
     fetch('/queries/sandman')
       .then(response => response.json())
       .then(data => {
-        console.log(data);
+        this.props.grabResults(data)
       }).catch(error => console.log(error))
   }
   render(){
