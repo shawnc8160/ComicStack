@@ -9,7 +9,7 @@ class App extends React.Component {
 
   grabResults(data) {
     this.setState({
-      searchResults: data
+      searchResults: data.results
     })
   }
 
