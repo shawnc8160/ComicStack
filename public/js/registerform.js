@@ -1,8 +1,9 @@
-class LoginForm extends React.Component {
+class RegisterForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       email: '',
+      username: '',
       password: ''
     }
     this.handleChange = this.handleChange.bind(this);
@@ -15,24 +16,25 @@ class LoginForm extends React.Component {
     this.setState({[event.target.id]: event.target.value})
   }
   /*=======================
-  Handles submit action from login form
+  Handles submit action from form
   =======================*/
   handleSubmit(event) {
     event.preventDefault();
-    // Format the login information
-    let login = {
-      auth: {
-        email: this.state.email,
-        password: this.state.password
+    let registerData = {
+      user: {
+        username: this.state.username,
+        password: this.state.password,
+        email: this.state.email
       }
     }
-    // Try to login
-    this.props.handleLogin(login);
+    console.log('Calling handleRegister', registerData);
+    this.props.handleRegister(registerData);
   }
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
         <input type="email" placeholder="email" onChange={this.handleChange} value={this.state.email} id='email'/>
+        <input type="text" placeholder="username" onChange={this.handleChange} value={this.state.username} id='username'/>
         <input type="password" placeholder="password" onChange={this.handleChange} value={this.state.password} id='password'/>
         <input type="submit"/>
       </form>

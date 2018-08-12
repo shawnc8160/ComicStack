@@ -62,7 +62,11 @@ class App extends React.Component {
     return (
       <div className='section'>
         <h1> ComicStack </h1>
-        {(this.state.user == null) ? <LoginForm setUser={this.setUser}/> : <div>Logged in as {this.state.user.username}</div>}
+        {
+          (this.state.user == null)
+          ? <User setUser={this.setUser}/>
+          : <div>Logged in as {this.state.user.username}</div>
+        }
         <SearchForm sendResults={this.sendResults}/>
       </div>
     )
