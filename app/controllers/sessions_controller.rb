@@ -9,6 +9,12 @@ class SessionsController < ApplicationController
 
   # Authorized only method
   def auth
-    render json: { status: 200, msg: "You are currently Logged-in as #{current_user.username}" }
+    render json: {
+      status: 200,
+      msg: "You are currently Logged-in as #{current_user.username}",
+      username: current_user.username,
+      id: current_user.id,
+      email: current_user.email
+    }
   end
 end
