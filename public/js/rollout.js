@@ -8,10 +8,10 @@ class Rollout extends React.Component {
   }
   render () {
     return (
-      <div>
+      <div id="rollout">
         <h1>Results</h1>
         {this.props.results.map((result, index) => {
-       return ( <div>
+       return ( <div id="rolloutItem">
                   {(result.resource_type == 'volume') ?
                       <div>
                         <h4>Comic Volume: {result.name}</h4>
@@ -22,7 +22,10 @@ class Rollout extends React.Component {
                 : ''}
                {(result.resource_type == 'character') ?
                       <div>
-                        <h4>Character: {result.name}</h4>
+                        <h4>Character: {result.name} ({result.publisher.name})</h4>
+                        <p>Gender: {(result.gender == 1)? <span>Male</span> : '' }{(result.gender == 2)? <span>Female</span>
+                        : '' }{(result.gender == 0)? <span>Other/Both</span>
+                        : '' }</p>
                         <img src={result.image.icon_url} />
                       </div>
                 : ''}
@@ -32,6 +35,7 @@ class Rollout extends React.Component {
                          <img src={result.image.icon_url} />
                       </div>
                  : ''}
+                 <hr></hr>
              </div>)//result div return
            })}
 

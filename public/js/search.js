@@ -13,9 +13,9 @@ class SearchForm extends React.Component {
       }).catch(error => console.log(error))
   }
   render(){
-    return (<div>
+    return (<div id="searchFormDiv">
     <form onSubmit={this.getResults}>
-      <div id="searchDiv">
+      <div id="searchBar">
         <select ref="filter">
           <option value="any" selected>All</option>
           <option value="issue">Issues</option>
