@@ -2,6 +2,7 @@ class SearchForm extends React.Component {
   constructor(props) {
     super(props)
     this.query = this.query.bind(this)
+    this.getResults = this.getResults.bind(this)
   }
   query(event){
         event.preventDefault();
@@ -12,7 +13,15 @@ class SearchForm extends React.Component {
         });
         });
     }
-
+  getResults () {
+    fetch('/queries/sandman')
+      .then(response => response.json())
+      .then(data => {
+        this.setState({
+          people: data
+        })
+      }).catch(error => console.log(error))
+  }
   render(){
     return (<div>
     <form onSubmit={this.query}>
