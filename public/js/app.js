@@ -1,27 +1,26 @@
 class App extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      searchResults: null
+    }
+    this.sendResults = this.sendResults.bind(this)
+  }
+  sendResults(data) {
+    this.state.searchResults
+  }
+
   render () {
     return (
-      <header>
-        <h1 className='title'> Labor Department 2.0 </h1>
-        <form>
-          <h2> Sign Up</h2>
-          <input type="text" placeholder="username"/>
-          <input type="text" placeholder="email"/>
-          <input type="password" placeholder="password"/>
-          <input type="submit"/>
-        </form>
-        <form>
-          <h2>Login</h2>
-          <input type="text" placeholder="email"/>
-          <input type="password" placeholder="password"/>
-          <input type="submit"/>
-        </form>
-      </header>
+      <div className='section'>
+        <h1> ComicStack </h1>
+        <SearchForm sendResults={this.sendResults}/>
+      </div>
     )
   }
 }
 
 ReactDOM.render(
   <App />,
-  document.querySelector('.container')
+  document.querySelector('.body')
 )
