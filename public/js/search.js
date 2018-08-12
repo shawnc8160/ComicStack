@@ -14,17 +14,16 @@ class SearchForm extends React.Component {
         });
     }
   getResults () {
+    event.preventDefault();
     fetch('/queries/sandman')
       .then(response => response.json())
       .then(data => {
-        this.setState({
-          people: data
-        })
+        console.log(data);
       }).catch(error => console.log(error))
   }
   render(){
     return (<div>
-    <form onSubmit={this.query}>
+    <form onSubmit={this.getResults}>
       <div id="searchDiv">
         <input
           ref="query" type="text" placeholder="Search for comic or character" />
