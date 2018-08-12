@@ -13,5 +13,5 @@ Rails.application.routes.draw do
   delete '/user/:id'       => 'users#destroy'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  get    '/queries/:url'        => 'queries#find'
+  get    '/queries/:query/:filter'        => 'queries#find'
 end

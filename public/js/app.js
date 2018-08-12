@@ -3,6 +3,8 @@ class App extends React.Component {
     super(props)
     this.state = {
       searchResults: null,
+      searchCount: null,
+      searchPage: 1,
       user: null
     }
     this.setUser = this.setUser.bind(this)
@@ -56,13 +58,12 @@ class App extends React.Component {
       user: userdata
     });
   }
-
   grabResults(data) {
     this.setState({
-      searchResults: data.results
+      searchResults: data.results,
+      searchCount: data.number_of_total_results
     })
   }
-
   render () {
     return (
       <div className='section'>
@@ -77,7 +78,7 @@ class App extends React.Component {
         <SearchForm grabResults={this.grabResults}/>
         {(this.state.searchResults == null)?
           '' :
-          <Rollout results={this.state.searchResults}></Rollout>
+          <Rollout results={this.state.searchResults} searchCount={this.state.searchCount}></Rollout>
       }
 
       </div>
