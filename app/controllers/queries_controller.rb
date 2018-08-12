@@ -3,7 +3,9 @@ class QueriesController < ApplicationController
 
   # get one (by id)
   def find
-    render json: Query.find(params["url"])
+    query = params["query"]
+    filter = params["filter"]
+    render json: Query.find(query, filter)
   end
 
 end
