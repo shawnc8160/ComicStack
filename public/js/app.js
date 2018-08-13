@@ -11,7 +11,8 @@ class App extends React.Component {
       user: null,
       selection: null,
       displayDetails: false,
-      displayList: true
+      displayList: true,
+      favorites: []
     }
     this.setUser = this.setUser.bind(this)
     this.getCookieData = this.getCookieData.bind(this)
@@ -19,6 +20,7 @@ class App extends React.Component {
     this.toggleState = this.toggleState.bind(this)
     this.setSelection = this.setSelection.bind(this)
     this.setPage = this.setPage.bind(this)
+    this.favoriteUpdate = this.favoriteUpdate.bind(this)
   }
   /*=======================
   Things to check for when page first loads
@@ -67,6 +69,9 @@ class App extends React.Component {
       user: userdata
     });
   }
+  /*=======================
+  grab the results from api calls and update app state
+  =======================*/
   grabResults(data, query, filter, newSearch) {
     let numpages = Math.ceil(data.number_of_total_results/50)
     if(newSearch === true) {
@@ -90,6 +95,9 @@ class App extends React.Component {
     }
 
   }
+  /*=======================
+  set current page in search results
+  =======================*/
   setPage (page) {
     console.log(page);
     this.setState({
@@ -113,6 +121,16 @@ class App extends React.Component {
     this.setState({
       selection: selection
     });
+  }
+  /*=======================
+  Update user's favorite list
+  =======================*/
+  favoriteUpdate (character) {
+    let tempFav = this.state.favorites;
+    tempFav.push(character)
+    this.setState({
+      favorites: tempFav
+    })
   }
   render () {
     return (
@@ -162,7 +180,8 @@ class App extends React.Component {
             (this.state.displayDetails)
             ? <ShowDetail
               toggleState={this.toggleState}
-              selection={this.state.selection}
+              selection={this.state.selection} favorites={this.state.favorites}
+              favoriteUpdate={this.favoriteUpdate}
               />
             : null
           }

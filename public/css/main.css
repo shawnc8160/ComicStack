@@ -22,3 +22,8 @@ body {
 #pagerDiv {
   max-width: 150px;
 }
+/* Favorite component */
+#favoriteDiv{
+  /* formatted to view purposes in development. need to change on final */
+  margin-top: 100px;
+}
