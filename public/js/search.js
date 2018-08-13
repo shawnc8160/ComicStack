@@ -17,18 +17,24 @@ class SearchForm extends React.Component {
   render(){
     return (<div id="searchFormDiv">
     <form onSubmit={this.getResults}>
-      <div id="searchBar" className="field has-addons">
-        <span class="select">
-          <select ref="filter">
-            <option value="any" selected>All</option>
-            <option value="issue">Issues</option>
-            <option value="volume">Comic Volumes</option>
-            <option value="character">Characters</option>
-          </select>
-        </span>
-        <input className="input"
-          ref="query" type="text" placeholder="Search for comic or character" />
-        <input className="button" type="submit" value="Search" />
+      <div id="searchBar" className="field has-addons has-addons-centered">
+        <p class="control">
+          <span class="select">
+            <select ref="filter">
+              <option value="any" selected>All</option>
+              <option value="issue">Issues</option>
+              <option value="volume">Comic Volumes</option>
+              <option value="character">Characters</option>
+            </select>
+          </span>
+        </p>
+        <p class="control">
+          <input className="input"
+            ref="query" type="text" placeholder="Search for comic or character" />
+        </p>
+        <p class="control">
+          <input className="button is-primary is-hovered" type="submit" value="Search" />
+        </p>
       </div>
     </form>
     </div>
