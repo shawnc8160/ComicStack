@@ -18,6 +18,7 @@ class App extends React.Component {
     this.grabResults = this.grabResults.bind(this)
     this.toggleState = this.toggleState.bind(this)
     this.setSelection = this.setSelection.bind(this)
+    this.setPage = this.setPage.bind(this)
   }
   /*=======================
   Things to check for when page first loads
@@ -66,14 +67,33 @@ class App extends React.Component {
       user: userdata
     });
   }
-  grabResults(data, query, filter) {
-    let pages = Math.ceil(data.number_of_total_results/50)
+  grabResults(data, query, filter, newSearch) {
+    let numpages = Math.ceil(data.number_of_total_results/50)
+    if(newSearch === true) {
+      this.setState({
+        searchResults: data.results,
+        searchCount: data.number_of_total_results,
+        pages: numpages,
+        searchPage: 1,
+        query: query,
+        filter: filter
+      })
+    }
+    else {
+      this.setState({
+        searchResults: data.results,
+        searchCount: data.number_of_total_results,
+        pages: numpages,
+        query: query,
+        filter: filter
+      })
+    }
+
+  }
+  setPage (page) {
+    console.log(page);
     this.setState({
-      searchResults: data.results,
-      searchCount: data.number_of_total_results,
-      pages: pages,
-      query: query,
-      filter: filter
+      searchPage: page
     })
   }
   /*=======================
