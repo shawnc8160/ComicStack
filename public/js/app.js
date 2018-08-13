@@ -9,7 +9,7 @@ class App extends React.Component {
       query: null,
       filter: null,
       user: null,
-      currentSelection: null,
+      selection: null,
       displayDetails: false,
       displayList: true
     }
@@ -90,7 +90,9 @@ class App extends React.Component {
   Toggles any of the booleans in state
   =======================*/
   setSelection(selection) {
-    console.log('Called setSelection', selection);
+    this.setState({
+      selection: selection
+    });
   }
   render () {
     return (
@@ -123,7 +125,7 @@ class App extends React.Component {
           (this.state.displayDetails)
           ? <ShowDetail
             toggleState={this.toggleState}
-            selection={this.state.currentSelection}
+            selection={this.state.selection}
             />
           : null
         }

@@ -62,8 +62,8 @@ class Rollout extends React.Component {
        return ( <div id="rolloutItem"
                       onClick={() => {
                         this.props.toggleState('displayDetails', 'displayList');
-                        console.log('Clicked');
-                      }}>
+                        this.props.setSelection(result);
+                      }} index={index}>
                   {(result.resource_type == 'volume') ?
                       <div>
                         <h4>Comic Volume: {result.name}</h4>
