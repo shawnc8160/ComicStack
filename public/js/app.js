@@ -96,16 +96,20 @@ class App extends React.Component {
   }
   render () {
     return (
-      <div className='section'>
-        <h1> ComicStack </h1>
+      <div className='container'>
 
-        {
-          (this.state.user == null)
-          ? <User setUser={this.setUser}/>
-          : <div>Logged in as {this.state.user.username}</div>
-        }
+        {/* Header */}
+        <header>
+          <h1> ComicStack </h1>
+          {
+            (this.state.user == null)
+            ? <User setUser={this.setUser}/>
+            : <div>Hello {this.state.user.username}</div>
+          }
+          <SearchForm grabResults={this.grabResults}/>
+        </header>
 
-        <SearchForm grabResults={this.grabResults}/>
+        {/* Body */}
         {
           (this.state.searchResults == null || this.state.displayList==false)
           ? ''
