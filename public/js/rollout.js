@@ -61,7 +61,11 @@ class Rollout extends React.Component {
           </form>
         </div>
         {this.props.results.map((result, index) => {
-       return ( <div id="rolloutItem">
+       return ( <div id="rolloutItem"
+                      onClick={() => {
+                        this.props.toggleState('displayDetails', 'displayList');
+                        this.props.setSelection(result);
+                      }} index={index}>
                   {(result.resource_type == 'volume') ?
                       <div>
                         <h4>Comic Volume: {result.name}</h4>
