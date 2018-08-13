@@ -96,43 +96,55 @@ class App extends React.Component {
   }
   render () {
     return (
-      <div className='container'>
+      <div>
 
         {/* Header */}
-        <header>
-          <h1> ComicStack </h1>
-          {
-            (this.state.user == null)
-            ? <User setUser={this.setUser}/>
-            : <div>Hello {this.state.user.username}</div>
-          }
-          <SearchForm grabResults={this.grabResults}/>
-        </header>
+        <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+            <div class="navbar-start">
+              <a class="navbar-item" href="/">
+                <h1> ComicStack </h1>
+              </a>
+            </div>
+            <div class="navbar-end">
+              <div class="navbar-item">
+                <SearchForm grabResults={this.grabResults}/>
+              </div>
+              <div class="navbar-item">
+                {
+                  (this.state.user != null)
+                  ? <div>Hello {this.state.user.username}</div>
+                  : <User setUser={this.setUser}/>
+                }
+              </div>
+            </div>
+        </nav>
 
         {/* Body */}
-        {
-          (this.state.searchResults == null || this.state.displayList==false)
-          ? ''
-          : <Rollout
-              results={this.state.searchResults}
-              searchCount={this.state.searchCount}
-              pages={this.state.pages}
-              grabResults={this.grabResults}
-              query={this.state.query}
-              filter={this.state.filter}
-              setSelection={this.setSelection}
-              toggleState={this.toggleState}>
-            </Rollout>
-        }
+        <div class="container">
+          {
+            (this.state.searchResults == null || this.state.displayList==false)
+            ? ''
+            : <Rollout
+                results={this.state.searchResults}
+                searchCount={this.state.searchCount}
+                pages={this.state.pages}
+                grabResults={this.grabResults}
+                query={this.state.query}
+                filter={this.state.filter}
+                setSelection={this.setSelection}
+                toggleState={this.toggleState}>
+              </Rollout>
+          }
 
-        {
-          (this.state.displayDetails)
-          ? <ShowDetail
-            toggleState={this.toggleState}
-            selection={this.state.selection}
-            />
-          : null
-        }
+          {
+            (this.state.displayDetails)
+            ? <ShowDetail
+              toggleState={this.toggleState}
+              selection={this.state.selection}
+              />
+            : null
+          }
+        </div>
 
       </div>
     )
