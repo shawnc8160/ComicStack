@@ -13,6 +13,7 @@ class App extends React.Component {
     this.setUser = this.setUser.bind(this)
     this.getCookieData = this.getCookieData.bind(this)
     this.grabResults = this.grabResults.bind(this)
+    this.setPage = this.setPage.bind(this)
   }
   /*=======================
   Things to check for when page first loads
@@ -61,14 +62,33 @@ class App extends React.Component {
       user: userdata
     });
   }
-  grabResults(data, query, filter) {
-    let pages = Math.ceil(data.number_of_total_results/50)
+  grabResults(data, query, filter, newSearch) {
+    let numpages = Math.ceil(data.number_of_total_results/50)
+    if(newSearch === true) {
+      this.setState({
+        searchResults: data.results,
+        searchCount: data.number_of_total_results,
+        pages: numpages,
+        searchPage: 1,
+        query: query,
+        filter: filter
+      })
+    }
+    else {
+      this.setState({
+        searchResults: data.results,
+        searchCount: data.number_of_total_results,
+        pages: numpages,
+        query: query,
+        filter: filter
+      })
+    }
+
+  }
+  setPage (page) {
+    console.log(page);
     this.setState({
-      searchResults: data.results,
-      searchCount: data.number_of_total_results,
-      pages: pages,
-      query: query,
-      filter: filter
+      searchPage: page
     })
   }
   render () {
@@ -85,7 +105,7 @@ class App extends React.Component {
         <SearchForm grabResults={this.grabResults}/>
         {(this.state.searchResults == null)?
           '' :
-          <Rollout results={this.state.searchResults} searchCount={this.state.searchCount} pages={this.state.pages} grabResults={this.grabResults} query={this.state.query} filter={this.state.filter}></Rollout>
+          <Rollout results={this.state.searchResults} searchCount={this.state.searchCount} pages={this.state.pages} grabResults={this.grabResults} query={this.state.query} filter={this.state.filter} searchPage={this.state.searchPage} setPage={this.setPage}> </Rollout>
       }
 
       </div>

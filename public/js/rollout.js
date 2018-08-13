@@ -2,8 +2,7 @@ class Rollout extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      page: 1,
-      totalPages: this.props.pages
+      page: 1
     }
     this.nextQuery = this.nextQuery.bind(this)
     this.paginate = this.paginate.bind(this)
@@ -18,23 +17,19 @@ class Rollout extends React.Component {
     fetch('/queries/' + this.props.query + '/' + this.props.filter + '/' + thispage)
       .then(response => response.json())
       .then(data => {
-        this.props.grabResults(data, this.props.query, this.props.filter)
+        this.props.grabResults(data, this.props.query, this.props.filter, false)
         this.clearForms()
       }).catch(error => console.log(error))
   }
   paginate(event) {
     let thispage = 0
     if(event.target.id == 'next') {
-      thispage = parseInt(this.state.page) + 1
-      this.setState({
-        page: thispage
-      })
+      thispage = parseInt(this.props.searchPage) + 1
+      this.props.setPage(thispage)
     }
     else {
-      thispage = parseInt(this.state.page) - 1
-      this.setState({
-        page: thispage
-      })
+      thispage = parseInt(this.props.searchPage) - 1
+      this.props.setPage(thispage)
     }
     this.nextQuery(thispage)
   }
@@ -47,9 +42,7 @@ class Rollout extends React.Component {
     else{
       thispage = this.refs.toppager.value
     }
-    this.setState({
-      page: thispage
-    })
+    this.props.setPage(thispage)
     this.nextQuery(thispage)
   }
   render () {
@@ -57,12 +50,12 @@ class Rollout extends React.Component {
       <div id="rollout">
         <h1>Results: {this.props.searchCount}</h1>
         <div id="pageCount">
-          Page: {(this.state.page > 1)? <a href="#" id="back" onClick={this.paginate}> &lt; </a> : ''}{this.state.page} of {this.state.totalPages} {(this.state.page < this.state.totalPages)? <a id="next" href="#" onClick={this.paginate}> &gt; </a> : ''}
+          Page: {(this.props.searchPage > 1)? <a href="#" id="back" onClick={this.paginate}> &lt; </a> : ''} {this.props.searchPage} of {this.props.pages} {(this.props.searchPage < this.props.pages)? <a id="next" href="#" onClick={this.paginate}> &gt; </a> : ''}
           <form id="topSkipper" onSubmit={this.skipToPage}>
             <div id="skipBar">
               <label for="pager">Skip to Page #:</label>
               <input
-                ref="toppager" id="pager" type="number" min="1" max={this.state.totalPages} placeholder="Page number:" />
+                ref="toppager" id="pager" type="number" min="1" max={this.props.pages} placeholder="Page number:" />
               <input type="submit" value="Jump" />
             </div>
           </form>
@@ -99,13 +92,13 @@ class Rollout extends React.Component {
            })}
           <div id="pageCount">
             <div id="pagerDiv">
-            Page: {(this.state.page > 1)? <a href="#" id="back" onClick={this.paginate}> &lt; </a> : ''}{this.state.page} of {this.state.totalPages} {(this.state.page < this.state.totalPages)? <a id="next" href="#" onClick={this.paginate}> &gt; </a> : ''}
+            Page: {(this.props.searchPage > 1)? <a href="#" id="back" onClick={this.paginate}> &lt; </a> : ''}{this.props.searchPage} of {this.props.pages} {(this.props.searchPage < this.props.pages)? <a id="next" href="#" onClick={this.paginate}> &gt; </a> : ''}
             </div>
             <form id="skipper" onSubmit={this.skipToPage}>
               <div id="skipBar">
                 <label for="pager">Skip to Page #:</label>
                 <input
-                  ref="pager" id="pager" type="number" min="1" max={this.state.totalPages} placeholder="Page number:" />
+                  ref="pager" id="pager" type="number" min="1" max={this.props.pages} placeholder="Page number:" />
                 <input type="submit" value="Jump" />
               </div>
             </form>
