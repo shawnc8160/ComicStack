@@ -47,6 +47,17 @@ class Rollout extends React.Component {
     return (
       <div id="rollout">
         <h1>Results: {this.props.searchCount}</h1>
+        <div id="pageCount">
+          Page: {(this.state.page > 1)? <a href="#" id="back" onClick={this.paginate}> &lt; </a> : ''}{this.state.page} of {this.state.totalPages} {(this.state.page < this.state.totalPages)? <a id="next" href="#" onClick={this.paginate}> &gt; </a> : ''}
+          <form id="skipper" onSubmit={this.skipToPage}>
+            <div id="skipBar">
+              <label for="pager">Skip to Page #:</label>
+              <input
+                ref="pager" id="pager" type="number" min="1" max={this.state.totalPages} placeholder="Page number:" />
+              <input type="submit" value="Jump" />
+            </div>
+          </form>
+        </div>
         {this.props.results.map((result, index) => {
        return ( <div id="rolloutItem">
                   {(result.resource_type == 'volume') ?
@@ -77,8 +88,10 @@ class Rollout extends React.Component {
 
              </div>)//result div return
            })}
-           <div id="pageCount">
+          <div id="pageCount">
+            <div id="pagerDiv">
             Page: {(this.state.page > 1)? <a href="#" id="back" onClick={this.paginate}> &lt; </a> : ''}{this.state.page} of {this.state.totalPages} {(this.state.page < this.state.totalPages)? <a id="next" href="#" onClick={this.paginate}> &gt; </a> : ''}
+            </div>
             <form id="skipper" onSubmit={this.skipToPage}>
               <div id="skipBar">
                 <label for="pager">Skip to Page #:</label>
@@ -87,7 +100,7 @@ class Rollout extends React.Component {
                 <input type="submit" value="Jump" />
               </div>
             </form>
-           </div>
+          </div>
       </div>
     )
   }
