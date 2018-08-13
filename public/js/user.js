@@ -83,8 +83,16 @@ class User extends React.Component {
   render() {
     return (
       <div>
-        <RegisterForm handleRegister={this.handleRegister}/>
-        <LoginForm handleLogin={this.handleLogin} />
+        {
+          (this.props.displayRegister)
+          ? <RegisterForm handleRegister={this.handleRegister} toggleState={this.props.toggleState}/>
+          : null
+        }
+        {
+          (this.props.displayLogin)
+          ? <LoginForm handleLogin={this.handleLogin} toggleState={this.props.toggleState}/>
+          : null
+        }
       </div>
     )
   }

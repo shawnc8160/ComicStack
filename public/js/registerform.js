@@ -28,6 +28,7 @@ class RegisterForm extends React.Component {
       }
     }
     console.log('Calling handleRegister', registerData);
+    this.props.toggleState('displayRegister');
     this.props.handleRegister(registerData);
   }
   render() {
@@ -36,7 +37,7 @@ class RegisterForm extends React.Component {
         <input type="email" placeholder="email" onChange={this.handleChange} value={this.state.email} id='email'/>
         <input type="text" placeholder="username" onChange={this.handleChange} value={this.state.username} id='username'/>
         <input type="password" placeholder="password" onChange={this.handleChange} value={this.state.password} id='password'/>
-        <input type="submit"/>
+        <input type="submit"/> 
       </form>
     )
   }

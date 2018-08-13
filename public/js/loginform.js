@@ -26,6 +26,7 @@ class LoginForm extends React.Component {
         password: this.state.password
       }
     }
+    this.props.toggleState('displayLogin');
     // Try to login
     this.props.handleLogin(login);
   }
@@ -35,6 +36,7 @@ class LoginForm extends React.Component {
         <input type="email" placeholder="email" onChange={this.handleChange} value={this.state.email} id='email'/>
         <input type="password" placeholder="password" onChange={this.handleChange} value={this.state.password} id='password'/>
         <input type="submit"/>
+        <button>Cancel</button>
       </form>
     )
   }

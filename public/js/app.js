@@ -11,7 +11,9 @@ class App extends React.Component {
       user: null,
       selection: null,
       displayDetails: false,
-      displayList: true
+      displayList: true,
+      displayLogin: false,
+      displayRegister: false,
     }
     this.setUser = this.setUser.bind(this)
     this.getCookieData = this.getCookieData.bind(this)
@@ -79,9 +81,10 @@ class App extends React.Component {
   }
 
   /*=======================
-  Toggles any of the booleans in state
+  Logs the user out
   =======================*/
   logOut() {
+    console.log('Logging Out');
     this.setState({
       user: null
     });
@@ -125,6 +128,7 @@ class App extends React.Component {
   Toggles any of the booleans in state
   =======================*/
   toggleState(...st) {
+    console.log('Toggle State called');
     let toUpdate = {}
     for (let key of st) {
       toUpdate[key] = !this.state[key]
@@ -136,41 +140,18 @@ class App extends React.Component {
     return (
       <div>
 
-        {/* Header */}
-        <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
-            <div class="navbar-start">
-              <a class="navbar-item" href="/">
-                <h1> ComicStack </h1>
-              </a>
-            </div>
-            <div class="navbar-end">
-              <div class="navbar-item ">
-                <SearchForm grabResults={this.grabResults}/>
-              </div>
-              <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link">
-                  {(this.state.user != null) ? this.state.user.username : "Not Logged In"}
-                  <span class="icon is-large">
-                    <i class="fas fa-lg fa-user-circle">
-                  </i></span>
-                </a>
-                  {
-                    (this.state.user != null)
-                    ? <div class="navbar-dropdown">
-                        <a class="navbar-item">Edit Profile</a>
-                        <a class="navbar-item" onClick={()=> this.logOut()}>Logout</a>
-                      </div>
-                    : <div class="navbar-dropdown">
-                        <a class="navbar-item">Login</a>
-                        <a class="navbar-item">Sign Up</a>
-                      </div>
-                  }
-            </div>
-          </div>
-        </nav>
-
-        {/* Body */}
+        <NavBar
+          grabResults={this.grabResults}
+          user={this.state.user}
+          logOut={this.logOut}
+          toggleState={this.toggleState}
+        />
         <div class="container">
+          {
+            (this.state.displayLogin || this.state.displayRegister)
+            ? <User setUser={this.setUser} displayLogin={this.state.displayLogin} displayRegister={this.state.displayRegister} toggleState={this.toggleState}/>
+            : null
+          }
           {
             (this.state.searchResults == null || this.state.displayList==false)
             ? ''
