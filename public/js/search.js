@@ -6,10 +6,12 @@ class SearchForm extends React.Component {
   getResults () {
     event.preventDefault();
     let query = this.refs.query.value
-    fetch('/queries/' + query + '/' + this.refs.filter.value)
+    let filter = this.refs.filter.value
+    fetch('/queries/' + query + '/' + filter + '/1')
       .then(response => response.json())
       .then(data => {
-        this.props.grabResults(data)
+        console.log(data);
+        this.props.grabResults(data, query, filter)
       }).catch(error => console.log(error))
   }
   render(){

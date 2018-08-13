@@ -4,7 +4,10 @@ class App extends React.Component {
     this.state = {
       searchResults: null,
       searchCount: null,
+      pages: null,
       searchPage: 1,
+      query: null,
+      filter: null,
       user: null
     }
     this.setUser = this.setUser.bind(this)
@@ -58,10 +61,14 @@ class App extends React.Component {
       user: userdata
     });
   }
-  grabResults(data) {
+  grabResults(data, query, filter) {
+    let pages = Math.ceil(data.number_of_total_results/50)
     this.setState({
       searchResults: data.results,
-      searchCount: data.number_of_total_results
+      searchCount: data.number_of_total_results,
+      pages: pages,
+      query: query,
+      filter: filter
     })
   }
   render () {
@@ -78,7 +85,7 @@ class App extends React.Component {
         <SearchForm grabResults={this.grabResults}/>
         {(this.state.searchResults == null)?
           '' :
-          <Rollout results={this.state.searchResults} searchCount={this.state.searchCount}></Rollout>
+          <Rollout results={this.state.searchResults} searchCount={this.state.searchCount} pages={this.state.pages} grabResults={this.grabResults} query={this.state.query} filter={this.state.filter}></Rollout>
       }
 
       </div>
