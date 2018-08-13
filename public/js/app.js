@@ -8,11 +8,14 @@ class App extends React.Component {
       searchPage: 1,
       query: null,
       filter: null,
-      user: null
+      user: null,
+      displayDetails: false,
+      displayList: true
     }
     this.setUser = this.setUser.bind(this)
     this.getCookieData = this.getCookieData.bind(this)
     this.grabResults = this.grabResults.bind(this)
+    this.toggleState = this.toggleState.bind(this)
   }
   /*=======================
   Things to check for when page first loads
@@ -71,6 +74,16 @@ class App extends React.Component {
       filter: filter
     })
   }
+  /*=======================
+  Toggles any of the booleans in state
+  =======================*/
+  toggleState(...st) {
+    let toUpdate = {}
+    for (let key of st) {
+      toUpdate[key] = !this.state[key]
+    }
+    this.setState(toUpdate)
+  }
   render () {
     return (
       <div className='section'>
@@ -83,9 +96,17 @@ class App extends React.Component {
         }
 
         <SearchForm grabResults={this.grabResults}/>
-        {(this.state.searchResults == null)?
+        {(this.state.searchResults == null && this.state.displayList)?
           '' :
-          <Rollout results={this.state.searchResults} searchCount={this.state.searchCount} pages={this.state.pages} grabResults={this.grabResults} query={this.state.query} filter={this.state.filter}></Rollout>
+          <Rollout
+            results={this.state.searchResults}
+            searchCount={this.state.searchCount}
+            pages={this.state.pages}
+            grabResults={this.grabResults}
+            query={this.state.query}
+            filter={this.state.filter}
+            toggleState={this.toggleState}>
+          </Rollout>
       }
 
       </div>

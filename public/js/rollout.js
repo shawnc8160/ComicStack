@@ -79,7 +79,7 @@ class Rollout extends React.Component {
                       </div>
                 : ''}
                 {(result.resource_type == 'issue') ?
-                      <div>
+                      <div onClick={this.props.showPage(result)}>
                          <h4>Issue: {result.volume.name} # {result.issue_number}: {result.name}</h4>
                          <img src={result.image.icon_url} />
                       </div>
