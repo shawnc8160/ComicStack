@@ -9,6 +9,7 @@ class App extends React.Component {
       query: null,
       filter: null,
       user: null,
+      currentSelection: null,
       displayDetails: false,
       displayList: true
     }
@@ -16,6 +17,7 @@ class App extends React.Component {
     this.getCookieData = this.getCookieData.bind(this)
     this.grabResults = this.grabResults.bind(this)
     this.toggleState = this.toggleState.bind(this)
+    this.setSelection = this.setSelection.bind(this)
   }
   /*=======================
   Things to check for when page first loads
@@ -84,6 +86,12 @@ class App extends React.Component {
     }
     this.setState(toUpdate)
   }
+  /*=======================
+  Toggles any of the booleans in state
+  =======================*/
+  setSelection(selection) {
+    console.log('Called setSelection', selection);
+  }
   render () {
     return (
       <div className='section'>
@@ -96,18 +104,29 @@ class App extends React.Component {
         }
 
         <SearchForm grabResults={this.grabResults}/>
-        {(this.state.searchResults == null && this.state.displayList)?
-          '' :
-          <Rollout
-            results={this.state.searchResults}
-            searchCount={this.state.searchCount}
-            pages={this.state.pages}
-            grabResults={this.grabResults}
-            query={this.state.query}
-            filter={this.state.filter}
-            toggleState={this.toggleState}>
-          </Rollout>
-      }
+        {
+          (this.state.searchResults == null || this.state.displayList==false)
+          ? ''
+          : <Rollout
+              results={this.state.searchResults}
+              searchCount={this.state.searchCount}
+              pages={this.state.pages}
+              grabResults={this.grabResults}
+              query={this.state.query}
+              filter={this.state.filter}
+              setSelection={this.setSelection}
+              toggleState={this.toggleState}>
+            </Rollout>
+        }
+
+        {
+          (this.state.displayDetails)
+          ? <ShowDetail
+            toggleState={this.toggleState}
+            selection={this.state.currentSelection}
+            />
+          : null
+        }
 
       </div>
     )

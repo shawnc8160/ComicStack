@@ -59,7 +59,11 @@ class Rollout extends React.Component {
           </form>
         </div>
         {this.props.results.map((result, index) => {
-       return ( <div id="rolloutItem">
+       return ( <div id="rolloutItem"
+                      onClick={() => {
+                        this.props.toggleState('displayDetails', 'displayList');
+                        console.log('Clicked');
+                      }}>
                   {(result.resource_type == 'volume') ?
                       <div>
                         <h4>Comic Volume: {result.name}</h4>
@@ -79,7 +83,7 @@ class Rollout extends React.Component {
                       </div>
                 : ''}
                 {(result.resource_type == 'issue') ?
-                      <div onClick={this.props.showPage(result)}>
+                      <div>
                          <h4>Issue: {result.volume.name} # {result.issue_number}: {result.name}</h4>
                          <img src={result.image.icon_url} />
                       </div>
