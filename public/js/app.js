@@ -152,7 +152,9 @@ class App extends React.Component {
                 query={this.state.query}
                 filter={this.state.filter}
                 setSelection={this.setSelection}
-                toggleState={this.toggleState}>
+                toggleState={this.toggleState}
+                searchPage={this.state.searchPage}
+                setPage={this.setPage}>
               </Rollout>
           }
 
