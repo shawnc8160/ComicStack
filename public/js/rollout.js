@@ -31,8 +31,7 @@ class Rollout extends React.Component {
       })
     }
     else {
-      thispage = this.state.page - 1
-      console.log(thispage);
+      thispage = parseInt(this.state.page) - 1
       this.setState({
         page: thispage
       })
@@ -40,8 +39,6 @@ class Rollout extends React.Component {
     this.nextQuery(thispage)
   }
   skipToPage() {
-    console.log(this.refs.pager.value);
-    console.log(this.refs.toppager.value);
     event.preventDefault();
     let thispage = ''
     if(this.refs.pager.value != '') {
