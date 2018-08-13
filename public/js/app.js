@@ -11,11 +11,14 @@ class App extends React.Component {
       user: null,
       selection: null,
       displayDetails: false,
-      displayList: true
+      displayList: true,
+      displayLogin: false,
+      displayRegister: false,
     }
     this.setUser = this.setUser.bind(this)
     this.getCookieData = this.getCookieData.bind(this)
     this.grabResults = this.grabResults.bind(this)
+    this.logOut = this.logOut.bind(this)
     this.toggleState = this.toggleState.bind(this)
     this.setSelection = this.setSelection.bind(this)
     this.setPage = this.setPage.bind(this)
@@ -52,21 +55,7 @@ class App extends React.Component {
     }
   }
 
-  /*=======================
-  Sets user data in state and cookies after log in
-  =======================*/
-  setUser(userdata, token) {
-    userdata['token'] = token;
-    console.log('data for user is: ', userdata);
-    // Sets userdata into cookie
-    Cookies.set('token', token);
-    Cookies.set('username', userdata['username']);
-    Cookies.set('id', userdata['id']);
-    console.log('Cookie is set', Cookies.get('token'));
-    this.setState({
-      user: userdata
-    });
-  }
+
   grabResults(data, query, filter, newSearch) {
     let numpages = Math.ceil(data.number_of_total_results/50)
     if(newSearch === true) {
@@ -90,22 +79,27 @@ class App extends React.Component {
     }
 
   }
+
+  /*=======================
+  Logs the user out
+  =======================*/
+  logOut() {
+    console.log('Logging Out');
+    this.setState({
+      user: null
+    });
+    Cookies.remove('token');
+    Cookies.remove('username');
+    Cookies.remove('id');
+  }
+
   setPage (page) {
     console.log(page);
     this.setState({
       searchPage: page
     })
   }
-  /*=======================
-  Toggles any of the booleans in state
-  =======================*/
-  toggleState(...st) {
-    let toUpdate = {}
-    for (let key of st) {
-      toUpdate[key] = !this.state[key]
-    }
-    this.setState(toUpdate)
-  }
+
   /*=======================
   Toggles any of the booleans in state
   =======================*/
@@ -114,33 +108,50 @@ class App extends React.Component {
       selection: selection
     });
   }
+
+  /*=======================
+  Sets user data in state and cookies after log in
+  =======================*/
+  setUser(userdata, token) {
+    userdata['token'] = token;
+    console.log('data for user is: ', userdata);
+    // Sets userdata into cookie
+    Cookies.set('token', token);
+    Cookies.set('username', userdata['username']);
+    Cookies.set('id', userdata['id']);
+    console.log('Cookie is set', Cookies.get('token'));
+    this.setState({
+      user: userdata
+    });
+  }
+  /*=======================
+  Toggles any of the booleans in state
+  =======================*/
+  toggleState(...st) {
+    console.log('Toggle State called');
+    let toUpdate = {}
+    for (let key of st) {
+      toUpdate[key] = !this.state[key]
+    }
+    this.setState(toUpdate)
+  }
+
   render () {
     return (
       <div>
 
-        {/* Header */}
-        <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
-            <div class="navbar-start">
-              <a class="navbar-item" href="/">
-                <h1> ComicStack </h1>
-              </a>
-            </div>
-            <div class="navbar-end">
-              <div class="navbar-item">
-                <SearchForm grabResults={this.grabResults}/>
-              </div>
-              <div class="navbar-item">
-                {
-                  (this.state.user != null)
-                  ? <div>Hello {this.state.user.username}</div>
-                  : <User setUser={this.setUser}/>
-                }
-              </div>
-            </div>
-        </nav>
-
-        {/* Body */}
+        <NavBar
+          grabResults={this.grabResults}
+          user={this.state.user}
+          logOut={this.logOut}
+          toggleState={this.toggleState}
+        />
         <div class="container">
+          {
+            (this.state.displayLogin || this.state.displayRegister)
+            ? <User setUser={this.setUser} displayLogin={this.state.displayLogin} displayRegister={this.state.displayRegister} toggleState={this.toggleState}/>
+            : null
+          }
           {
             (this.state.searchResults == null || this.state.displayList==false)
             ? ''
