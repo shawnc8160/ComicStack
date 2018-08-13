@@ -34,10 +34,40 @@ class RegisterForm extends React.Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <input type="email" placeholder="email" onChange={this.handleChange} value={this.state.email} id='email'/>
-        <input type="text" placeholder="username" onChange={this.handleChange} value={this.state.username} id='username'/>
-        <input type="password" placeholder="password" onChange={this.handleChange} value={this.state.password} id='password'/>
-        <input type="submit"/> 
+        <div class="field is-horizontal">
+          <div class="field-body">
+            <div class="field">
+              <p class="control is-expanded has-icons-left">
+                <input class="input" type="text" placeholder="username" onChange={this.handleChange} value={this.state.username} id='username'/>
+                <span class="icon is-small is-left">
+                  <i class="fas fa-user"></i>
+                </span>
+              </p>
+            </div>
+            <div class="field">
+              <p class="control is-expanded has-icons-left">
+                <input class="input" type="email" placeholder="Email" onChange={this.handleChange} value={this.state.email} id='email'/>
+                <span class="icon is-small is-left">
+                  <i class="fas fa-envelope"></i>
+                </span>
+              </p>
+            </div>
+            <div class="field">
+              <p class="control is-expanded has-icons-left">
+                <input class="input is-success" type="password" placeholder="Password" onChange={this.handleChange} value={this.state.password} id='password'/>
+                <span class="icon is-small is-left">
+                  <i class="fas fa-key"></i>
+                </span>
+              </p>
+            </div>
+            <div class='field'>
+              <p class="control">
+                <input class="button is-success" type="submit"/>
+                <button onClick={()=> this.props.toggleState('displayRegister')} class="button is-danger">Cancel</button>
+              </p>
+            </div>
+          </div>
+        </div>
       </form>
     )
   }

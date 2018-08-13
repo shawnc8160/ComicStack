@@ -31,7 +31,7 @@ class NavBar extends React.Component{
                     </div>
                   : <div class="navbar-dropdown">
                       <a class="navbar-item" onClick={()=> this.props.toggleState('displayLogin')}>Login</a>
-                      <a class="navbar-item">Sign Up</a>
+                      <a class="navbar-item" onClick={()=> this.props.toggleState('displayRegister')}>Sign Up</a>
                     </div>
                 }
           </div>
