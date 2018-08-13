@@ -16,6 +16,7 @@ class App extends React.Component {
     this.setUser = this.setUser.bind(this)
     this.getCookieData = this.getCookieData.bind(this)
     this.grabResults = this.grabResults.bind(this)
+    this.logOut = this.logOut.bind(this)
     this.toggleState = this.toggleState.bind(this)
     this.setSelection = this.setSelection.bind(this)
     this.setPage = this.setPage.bind(this)
@@ -52,21 +53,7 @@ class App extends React.Component {
     }
   }
 
-  /*=======================
-  Sets user data in state and cookies after log in
-  =======================*/
-  setUser(userdata, token) {
-    userdata['token'] = token;
-    console.log('data for user is: ', userdata);
-    // Sets userdata into cookie
-    Cookies.set('token', token);
-    Cookies.set('username', userdata['username']);
-    Cookies.set('id', userdata['id']);
-    console.log('Cookie is set', Cookies.get('token'));
-    this.setState({
-      user: userdata
-    });
-  }
+
   grabResults(data, query, filter, newSearch) {
     let numpages = Math.ceil(data.number_of_total_results/50)
     if(newSearch === true) {
@@ -90,11 +77,49 @@ class App extends React.Component {
     }
 
   }
+
+  /*=======================
+  Toggles any of the booleans in state
+  =======================*/
+  logOut() {
+    this.setState({
+      user: null
+    });
+    Cookies.remove('token');
+    Cookies.remove('username');
+    Cookies.remove('id');
+  }
+
   setPage (page) {
     console.log(page);
     this.setState({
       searchPage: page
     })
+  }
+
+  /*=======================
+  Toggles any of the booleans in state
+  =======================*/
+  setSelection(selection) {
+    this.setState({
+      selection: selection
+    });
+  }
+
+  /*=======================
+  Sets user data in state and cookies after log in
+  =======================*/
+  setUser(userdata, token) {
+    userdata['token'] = token;
+    console.log('data for user is: ', userdata);
+    // Sets userdata into cookie
+    Cookies.set('token', token);
+    Cookies.set('username', userdata['username']);
+    Cookies.set('id', userdata['id']);
+    console.log('Cookie is set', Cookies.get('token'));
+    this.setState({
+      user: userdata
+    });
   }
   /*=======================
   Toggles any of the booleans in state
@@ -106,14 +131,7 @@ class App extends React.Component {
     }
     this.setState(toUpdate)
   }
-  /*=======================
-  Toggles any of the booleans in state
-  =======================*/
-  setSelection(selection) {
-    this.setState({
-      selection: selection
-    });
-  }
+
   render () {
     return (
       <div>
@@ -126,17 +144,29 @@ class App extends React.Component {
               </a>
             </div>
             <div class="navbar-end">
-              <div class="navbar-item">
+              <div class="navbar-item ">
                 <SearchForm grabResults={this.grabResults}/>
               </div>
-              <div class="navbar-item">
-                {
-                  (this.state.user != null)
-                  ? <div>Hello {this.state.user.username}</div>
-                  : <User setUser={this.setUser}/>
-                }
-              </div>
+              <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link">
+                  {(this.state.user != null) ? this.state.user.username : "Not Logged In"}
+                  <span class="icon is-large">
+                    <i class="fas fa-lg fa-user-circle">
+                  </i></span>
+                </a>
+                  {
+                    (this.state.user != null)
+                    ? <div class="navbar-dropdown">
+                        <a class="navbar-item">Edit Profile</a>
+                        <a class="navbar-item" onClick={()=> this.logOut()}>Logout</a>
+                      </div>
+                    : <div class="navbar-dropdown">
+                        <a class="navbar-item">Login</a>
+                        <a class="navbar-item">Sign Up</a>
+                      </div>
+                  }
             </div>
+          </div>
         </nav>
 
         {/* Body */}

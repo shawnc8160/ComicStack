@@ -2,6 +2,11 @@
 body {
 
 }
+
+/* Nav Bar */
+.fas:hover {
+  color: red;
+}
 /* app.js css */
 
 /* User component */
