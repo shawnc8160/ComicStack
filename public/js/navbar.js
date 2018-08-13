@@ -9,6 +9,9 @@ class NavBar extends React.Component{
             <a class="navbar-item" href="/">
               <h1> ComicStack </h1>
             </a>
+            <a class="navbar-item" href="/">
+              My Collection
+            </a>
           </div>
           <div class="navbar-end">
             <div class="navbar-item ">
@@ -24,7 +27,6 @@ class NavBar extends React.Component{
                 {
                   (this.props.user != null)
                   ? <div class="navbar-dropdown">
-                      <a class="navbar-item">Edit Profile</a>
                       <a class="navbar-item" onClick={()=> this.props.logOut()}>Logout</a>
                     </div>
                   : <div class="navbar-dropdown">
