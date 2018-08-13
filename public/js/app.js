@@ -12,6 +12,7 @@ class App extends React.Component {
       selection: null,
       displayDetails: false,
       displayList: true,
+      favorites: []
       displayLogin: false,
       displayRegister: false,
     }
@@ -22,6 +23,7 @@ class App extends React.Component {
     this.toggleState = this.toggleState.bind(this)
     this.setSelection = this.setSelection.bind(this)
     this.setPage = this.setPage.bind(this)
+    this.favoriteUpdate = this.favoriteUpdate.bind(this)
   }
   /*=======================
   Things to check for when page first loads
@@ -55,7 +57,24 @@ class App extends React.Component {
     }
   }
 
-
+  /*=======================
+  Sets user data in state and cookies after log in
+  =======================*/
+  setUser(userdata, token) {
+    userdata['token'] = token;
+    console.log('data for user is: ', userdata);
+    // Sets userdata into cookie
+    Cookies.set('token', token);
+    Cookies.set('username', userdata['username']);
+    Cookies.set('id', userdata['id']);
+    console.log('Cookie is set', Cookies.get('token'));
+    this.setState({
+      user: userdata
+    });
+  }
+  /*=======================
+  grab the results from api calls and update app state
+  =======================*/
   grabResults(data, query, filter, newSearch) {
     let numpages = Math.ceil(data.number_of_total_results/50)
     if(newSearch === true) {
@@ -79,6 +98,9 @@ class App extends React.Component {
     }
 
   }
+  /*=======================
+  set current page in search results
+  =======================*/
 
   /*=======================
   Logs the user out
@@ -136,6 +158,24 @@ class App extends React.Component {
     this.setState(toUpdate)
   }
 
+  /*=======================
+  Toggles any of the booleans in state
+  =======================*/
+  setSelection(selection) {
+    this.setState({
+      selection: selection
+    });
+  }
+  /*=======================
+  Update user's favorite list
+  =======================*/
+  favoriteUpdate (character) {
+    let tempFav = this.state.favorites;
+    tempFav.push(character)
+    this.setState({
+      favorites: tempFav
+    })
+  }
   render () {
     return (
       <div>
@@ -173,7 +213,8 @@ class App extends React.Component {
             (this.state.displayDetails)
             ? <ShowDetail
               toggleState={this.toggleState}
-              selection={this.state.selection}
+              selection={this.state.selection} favorites={this.state.favorites}
+              favoriteUpdate={this.favoriteUpdate}
               />
             : null
           }

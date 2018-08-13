@@ -2,17 +2,55 @@ class ShowDetail extends React.Component {
   constructor(props) {
     super(props);
     this.addCollection = this.addCollection.bind(this)
+    this.favoriteSubmit = this.favoriteSubmit.bind(this)
   }
+  /*=======================
+  submit hero object to be added to database(returns exiting object back if already in database)
+  =======================*/
+  favoriteSubmit (character) {
+    //send hero object to heroes database
+    fetch('/characters', {
+      body: JSON.stringify(character),
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(createdHero => {
+        createdHero = createdHero.json()
+      })
+      .then(jsonedChar => {
+        this.props.favoriteUpdate(jsonedChar)
+        //call the linkfavorite
+      })
+      .catch(error => console.log(error))
+  }
+  /*=======================
+  Add to collection
+    -- checks for character/volume
+    -- adds to the appropriate collection
+  =======================*/
   addCollection() {
-    // Add to collection
-    // We can split this up but I was thinking we can use
-    // logic to find what it is (issue, char, vol) and add it to the appropriate collection
+    if (this.props.selection.resource_type === 'character') {
+      let character = {
+        id: this.props.selection.id,
+        name: this.props.selection.name,
+        deck: this.props.selection.deck,
+        publisher: this.props.selection.publisher.name,
+        gender: this.props.selection.gender,
+        icon_url: this.props.selection.image.icon_url,
+        real_name: this.props.selection.real_name,
+        resource_type: this.props.selection.resource_type
+      }
+      this.favoriteSubmit(character)
+    }
   }
   render() {
     return (
       <div class="show-container">
         <button onClick={() => {this.props.toggleState('displayDetails', 'displayList');}}>Back To Results</button>
-        <button onClick={this.addCollection}>Add to Collection</button>
+        <Favorite addCollection={this.addCollection}></Favorite>
         <h1>
           {
             (this.props.selection.resource_type=="issue")

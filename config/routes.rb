@@ -13,5 +13,9 @@ Rails.application.routes.draw do
   delete '/user/:id'       => 'users#destroy'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  get    '/queries/:query/:filter/:page'        => 'queries#find'
+  #All queries to the comic vine api
+  get    '/queries/:query/:filter/:page'      => 'queries#find'
+
+  #Character actions
+  post   '/characters'     => 'characters#create'
 end
