@@ -8,27 +8,30 @@ class Rollout extends React.Component {
     this.nextQuery = this.nextQuery.bind(this)
     this.paginate = this.paginate.bind(this)
     this.skipToPage = this.skipToPage.bind(this)
+    this.clearForms = this.clearForms.bind(this)
+  }
+  clearForms = () => {
+  document.getElementById("topSkipper").reset();
+  document.getElementById("skipper").reset();
   }
   nextQuery (thispage) {
     fetch('/queries/' + this.props.query + '/' + this.props.filter + '/' + thispage)
       .then(response => response.json())
       .then(data => {
-        console.log(data);
         this.props.grabResults(data, this.props.query, this.props.filter)
+        this.clearForms()
       }).catch(error => console.log(error))
   }
   paginate(event) {
     let thispage = 0
     if(event.target.id == 'next') {
-      thispage = this.state.page + 1
-      console.log(thispage);
+      thispage = parseInt(this.state.page) + 1
       this.setState({
         page: thispage
       })
     }
     else {
-      thispage = this.state.page - 1
-      console.log(thispage);
+      thispage = parseInt(this.state.page) - 1
       this.setState({
         page: thispage
       })
@@ -37,7 +40,13 @@ class Rollout extends React.Component {
   }
   skipToPage() {
     event.preventDefault();
-    let thispage = this.refs.pager.value
+    let thispage = ''
+    if(this.refs.pager.value != '') {
+      thispage = this.refs.pager.value
+    }
+    else{
+      thispage = this.refs.toppager.value
+    }
     this.setState({
       page: thispage
     })
@@ -49,11 +58,11 @@ class Rollout extends React.Component {
         <h1>Results: {this.props.searchCount}</h1>
         <div id="pageCount">
           Page: {(this.state.page > 1)? <a href="#" id="back" onClick={this.paginate}> &lt; </a> : ''}{this.state.page} of {this.state.totalPages} {(this.state.page < this.state.totalPages)? <a id="next" href="#" onClick={this.paginate}> &gt; </a> : ''}
-          <form id="skipper" onSubmit={this.skipToPage}>
+          <form id="topSkipper" onSubmit={this.skipToPage}>
             <div id="skipBar">
               <label for="pager">Skip to Page #:</label>
               <input
-                ref="pager" id="pager" type="number" min="1" max={this.state.totalPages} placeholder="Page number:" />
+                ref="toppager" id="pager" type="number" min="1" max={this.state.totalPages} placeholder="Page number:" />
               <input type="submit" value="Jump" />
             </div>
           </form>
