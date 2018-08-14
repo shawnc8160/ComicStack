@@ -6,4 +6,9 @@ class OwnsController < ApplicationController
     render json: Own.create(params["own"])
   end
 
+  # Get collection for particular person
+  def show
+    render json: Own.find(params["id"])
+  end
+
 end

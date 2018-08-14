@@ -111,7 +111,7 @@ class ShowDetail extends React.Component {
       // parse the character's deck for single quotes
       if (this.props.selection.deck != null) {
         let thisDeck = this.props.selection.deck
-        let cleanString = thisDeck.replace(/'/g,'');
+        let cleanString = (thisDeck) ? thisDeck.replace(/'/g,'') : '';
         let character = {
           id: this.props.selection.id,
           name: this.props.selection.name,
@@ -141,9 +141,9 @@ class ShowDetail extends React.Component {
       // parse the issue's description for single quotes
       if (this.props.selection.description != null) {
         let thisDesc = this.props.selection.description
-        let cleanString = thisDesc.replace(/'/g,'');
+        let cleanString = (thisDesc) ? thisDesc.replace(/'/g,'') : '';
         let thisName = this.props.selection.name
-        let cleanName = thisName.replace(/'/g,'');
+        let cleanName = (thisName) ? thisName.replace(/'/g,'') : '';
         let thisissue = {
           id: this.props.selection.id,
           name: cleanName,
@@ -158,7 +158,7 @@ class ShowDetail extends React.Component {
       }
       else {
         let thisName = this.props.selection.name
-        let cleanName = thisName.replace(/'/g,'');
+        let cleanName = (thisName) ? thisName.replace(/'/g,'') : '';
         let thisissue = {
           id: this.props.selection.id,
           name: cleanName,
