@@ -5,7 +5,7 @@ class Favorite extends React.Component {
   render() {
     return (
       <div id="favoriteDiv">
-        <button onClick={this.props.addCollection}>
+        <button class="button is-primary is-hovered" onClick={this.props.addCollection}>
           ADD TO FAVORITES
         </button>
       </div>

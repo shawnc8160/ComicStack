@@ -37,5 +37,30 @@ body {
 /* Favorite component */
 #favoriteDiv{
   /* formatted to view purposes in development. need to change on final */
-  margin-top: 100px;
+}
+
+/* ShowDetail Component */
+.showdetail-header {
+  color: rgb(31,195,167);
+  font-size: 14px;
+}
+
+.showdetail-img {
+  max-width: 200px;
+  max-height: 400px;
+  float: left;
+  margin: 15px;
+}
+
+.show-detail-info {
+  padding: 10px;
+}
+
+.show-detail-label {
+  font-weight: bold;
+}
+
+.show-detail-section {
+  margin: 10px;
+  margin-bottom: 15px;
 }

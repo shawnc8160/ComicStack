@@ -63,7 +63,7 @@ class Rollout extends React.Component {
         {this.props.results.map((result, index) => {
        return ( <div id="rolloutItem"
                       onClick={() => {
-                        this.props.toggleState('displayDetails', 'displayList');
+                        this.props.toggleState('displayDetails');
                         this.props.setSelection(result);
                       }} index={index}>
                   {(result.resource_type == 'volume') ?
