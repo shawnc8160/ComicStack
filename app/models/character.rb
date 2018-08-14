@@ -21,7 +21,7 @@ class Character
         @resource_type = opts["resource_type"]
         @publisher = opts["publisher"]
         @deck = opts["deck"]
-        @icon_url_id = opts["icon_url"]
+        @icon_url = opts["icon_url"]
     end
 
     def self.create(thisChar)

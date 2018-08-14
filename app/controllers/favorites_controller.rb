@@ -6,4 +6,9 @@ class FavoritesController < ApplicationController
     render json: Favorite.create(params["favorite"])
   end
 
+  # Get all favorites for particular person
+  def index
+    render json: Favorite.all(params["id"])
+  end
+
 end

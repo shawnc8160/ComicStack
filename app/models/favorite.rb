@@ -36,4 +36,47 @@ class Favorite
         return { "added" => true }
       end
     end
+
+    # get all
+    def self.all(id)
+      results = DB.exec(
+          <<-SQL
+              SELECT
+                favorites.*,
+                users.username,
+                characters.name,
+                characters.deck,
+                characters.publisher,
+                characters.gender,
+                characters.icon_url,
+                characters.real_name,
+                characters.resource_type
+              FROM favorites
+              JOIN users
+                ON favorites.user_id = users.id
+              JOIN characters
+                on favorites.character_id = characters.id
+              where favorites.user_id = #{id};
+          SQL
+      )
+      puts "=================="
+      p 'Getting favorites, user_id is ' + id
+
+      arr = []
+      results.map do |result|
+        arr.push(result)
+      end
+
+      puts "=================="
+
+      puts "=================="
+
+      newObject = { "results" => arr }
+      p newObject
+
+      puts "=================="
+      return {
+        "results" => results
+      }
+    end
 end
