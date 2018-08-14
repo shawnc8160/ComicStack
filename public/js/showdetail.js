@@ -52,30 +52,32 @@ class ShowDetail extends React.Component {
         <div class="modal-background"></div>
         <div class="modal-card">
           <header class="modal-card-head">
-            <h1 class="modal-card-title">
+
               {
                 (this.props.selection.resource_type=="issue")
-                ? "Issue: " + this.props.selection.volume.name + " " + this.props.selection.issue_number
+                ? <div class="modal-card-title"><span class="icon is-small showdetail-header"><i class="fas fa-book"></i></span><span class="showdetail-header">Issue</span><h1 class="title"> {this.props.selection.name}</h1></div>
                 : (this.props.selection.resource_type=="character")
-                  ? "Character: " + this.props.selection.name
-                  : "Volume: " + this.props.selection.name
+                  ? <div class="modal-card-title"><span class="icon is-small showdetail-header"><i class="far fa-user"></i></span><span class="showdetail-header">Character</span><h1 class="title"> {this.props.selection.name}</h1></div>
+                  : <div class="modal-card-title"><span class="icon is-small showdetail-header"><i class="fas fa-book-reader"></i></span><span class="showdetail-header">Volume</span><h1 class="title"> {this.props.selection.name}</h1></div>
               }
-            </h1>
+
             <button class="delete" aria-label="close" onClick={() => this.props.toggleState('displayDetails')}></button>
           </header>
           <section class="modal-card-body">
-            <img src={this.props.selection.image.medium_url} />
-            <h2>
+            <img class="showdetail-img" src={this.props.selection.image.medium_url} />
+            <div class="show-detail-info">
               {
                 (this.props.selection.resource_type=="issue")
-                ? "Cover Date: " + this.props.selection.cover_date
+                ? <div class="show-detail-section"><h2 class="show-detail-label">Cover Date</h2><span>{this.props.selection.cover_date}</span></div>
                 : (this.props.selection.resource_type=="character")
-                  ? "Real Name: " + this.props.selection.real_name
-                  : "Start Year: " + this.props.selection.start_year
+                  ? <div class="show-detail-section"><h2 class="show-detail-label">Real Name</h2><span>{this.props.selection.real_name}</span></div>
+                  : <div class="show-detail-section"><h2 class="show-detail-label">Start Year</h2><span>{this.props.selection.start_year}</span></div>
               }
-            </h2>
-            <h2>Description:</h2>
-            <div dangerouslySetInnerHTML={{ __html: this.props.selection.description }} />
+              <div class="show-detail-section">
+                <h2 class="show-detail-label">Description:</h2>
+                <div dangerouslySetInnerHTML={{ __html: this.props.selection.description }} />
+              </div>
+            </div>
           </section>
           <footer class="modal-card-foot">
             <Favorite addCollection={this.addCollection}></Favorite>
