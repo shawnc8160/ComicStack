@@ -58,19 +58,36 @@ class ShowDetail extends React.Component {
   =======================*/
   addCollection() {
     if (this.props.selection.resource_type === 'character') {
-      let character = {
-        id: this.props.selection.id,
-        name: this.props.selection.name,
-        deck: this.props.selection.deck,
-        publisher: this.props.selection.publisher.name,
-        gender: this.props.selection.gender,
-        icon_url: this.props.selection.image.icon_url,
-        real_name: this.props.selection.real_name,
-        resource_type: this.props.selection.resource_type
+      // parse the selection's deck for single quotes
+      if (this.props.selection.deck != null) {
+        let thisDeck = this.props.selection.deck
+        let cleanString = thisDeck.replace(/'/g,'');
+        let character = {
+          id: this.props.selection.id,
+          name: this.props.selection.name,
+          deck: cleanString,
+          publisher: this.props.selection.publisher.name,
+          gender: this.props.selection.gender,
+          icon_url: this.props.selection.image.icon_url,
+          real_name: this.props.selection.real_name,
+          resource_type: this.props.selection.resource_type
+        }
+        this.characterSubmit(character)
       }
-      this.characterSubmit(character)
-    }
-  }
+      else {
+        let character = {
+          id: this.props.selection.id,
+          name: this.props.selection.name,
+          publisher: this.props.selection.publisher.name,
+          gender: this.props.selection.gender,
+          icon_url: this.props.selection.image.icon_url,
+          real_name: this.props.selection.real_name,
+          resource_type: this.props.selection.resource_type
+        }
+        this.characterSubmit(character)
+      }
+    }//if character
+  }//end of addCollection method
   render() {
     return (
       <div class="show-container">
