@@ -13,6 +13,7 @@ class App extends React.Component {
       displayDetails: false,
       displayList: true,
       favorites: [],
+      collection: [],
       displayLogin: false,
       displayRegister: false,
     }
@@ -24,6 +25,7 @@ class App extends React.Component {
     this.setSelection = this.setSelection.bind(this)
     this.setPage = this.setPage.bind(this)
     this.favoriteUpdate = this.favoriteUpdate.bind(this)
+    this.collectionUpdate = this.collectionUpdate.bind(this)
   }
   /*=======================
   Things to check for when page first loads
@@ -176,6 +178,16 @@ class App extends React.Component {
       favorites: tempFav
     })
   }
+  /*=======================
+  Update user's collection list
+  =======================*/
+  collectionUpdate (issue) {
+    let tempIss = this.state.collection;
+    tempIss.push(issue)
+    this.setState({
+      collection: tempIss
+    })
+  }
   render () {
     return (
       <div>
@@ -214,7 +226,9 @@ class App extends React.Component {
             ? <ShowDetail
               toggleState={this.toggleState}
               selection={this.state.selection} favorites={this.state.favorites}
-              favoriteUpdate={this.favoriteUpdate} user={this.state.user} favorites={this.state.favorites}
+              favoriteUpdate={this.favoriteUpdate} user={this.state.user}
+              collection={this.state.collection}
+              collectionUpdate={this.collectionUpdate}
               />
             : null
           }

@@ -88,6 +88,7 @@ class Rollout extends React.Component {
                       <div>
                          <h4>Issue: {result.volume.name} # {result.issue_number}: {result.name}</h4>
                          <img src={result.image.icon_url} />
+                         <h4>Cover Date: {result.cover_date}</h4>
                       </div>
                  : ''}
                  <hr></hr>
