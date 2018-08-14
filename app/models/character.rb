@@ -19,22 +19,32 @@ class Character
     end
 
     def self.create(thisChar)
-      results = DB.exec(
-        <<-SQL
-      INSERT INTO characters(id, name, deck, publisher, gender, icon_url, real_name, resource_type ) VALUES (
-                 #{thisChar["id"]},
-                '#{thisChar["name"]}',
-                '#{thisChar["deck"] ? thisChar["deck"] : "NULL"}}',
-                '#{thisChar["publisher"]}',
-                 #{thisChar["gender"]},
-                '#{thisChar["icon_url"]}',
-                '#{thisChar["real_name"]}',
-                '#{thisChar["resource_type"]}' )
-          RETURNING id, name, deck, publisher, gender, icon_url, real_name, resource_type;
+      existResult = DB.exec(
+          <<-SQL
+          SELECT * FROM characters WHERE id = #{thisChar["id"]};
           SQL
       )
-      newChar = results.first
-          return Character.new(newChar)
+      if existResult.first == nil
+        p "character does not exist adding now"
+        results = DB.exec(
+        <<-SQL
+        INSERT INTO characters(id, name, deck, publisher, gender, icon_url, real_name, resource_type ) VALUES (
+                   #{thisChar["id"]},
+                  '#{thisChar["name"]}',
+                  '#{thisChar["deck"] ? thisChar["deck"] : "NULL"}}',
+                  '#{thisChar["publisher"]}',
+                   #{thisChar["gender"]},
+                  '#{thisChar["icon_url"]}',
+                  '#{thisChar["real_name"]}',
+                  '#{thisChar["resource_type"]}' )
+            RETURNING id, name, deck, publisher, gender, icon_url, real_name, resource_type;
+            SQL
+        )
+        newChar = results.first
+        return Character.new(newChar)
+      else
+        p "character exists here it is"
+        return Character.new(existResult.first)
+      end
     end
-
 end

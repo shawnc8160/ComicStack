@@ -2,12 +2,12 @@ class ShowDetail extends React.Component {
   constructor(props) {
     super(props);
     this.addCollection = this.addCollection.bind(this)
-    this.favoriteSubmit = this.favoriteSubmit.bind(this)
+    this.characterSubmit = this.characterSubmit.bind(this)
   }
   /*=======================
   submit hero object to be added to database(returns exiting object back if already in database)
   =======================*/
-  favoriteSubmit (character) {
+  characterSubmit (character) {
     //send hero object to heroes database
     fetch('/characters', {
       body: JSON.stringify(character),
@@ -18,9 +18,10 @@ class ShowDetail extends React.Component {
       }
     })
     .then(createdHero => {
-        createdHero = createdHero.json()
+        return createdHero.json()
       })
       .then(jsonedChar => {
+        console.log(jsonedChar);
         this.props.favoriteUpdate(jsonedChar)
         //call the linkfavorite
       })
@@ -43,7 +44,7 @@ class ShowDetail extends React.Component {
         real_name: this.props.selection.real_name,
         resource_type: this.props.selection.resource_type
       }
-      this.favoriteSubmit(character)
+      this.characterSubmit(character)
     }
   }
   render() {

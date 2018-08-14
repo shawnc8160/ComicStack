@@ -12,7 +12,7 @@ class App extends React.Component {
       selection: null,
       displayDetails: false,
       displayList: true,
-      favorites: []
+      favorites: [],
       displayLogin: false,
       displayRegister: false,
     }
