@@ -25,7 +25,9 @@ class App extends React.Component {
     this.setSelection = this.setSelection.bind(this)
     this.setPage = this.setPage.bind(this)
     this.favoriteUpdate = this.favoriteUpdate.bind(this)
+    this.getFavorites = this.getFavorites.bind(this)
     this.collectionUpdate = this.collectionUpdate.bind(this)
+    this.setFavorites = this.setFavorites.bind(this)
   }
   /*=======================
   Things to check for when page first loads
@@ -35,6 +37,8 @@ class App extends React.Component {
     if (this.state.user == null) {
       // Check for cookie information if they aren't logged in
       this.getCookieData()
+    } else {
+      this.getFavorites(this.state.user.id)
     }
   }
   /*=======================
@@ -54,6 +58,8 @@ class App extends React.Component {
       this.setState({
         user: userData
       })
+      console.log('Got cookie data, state is', this.state);
+      this.getFavorites(userData['id']);
     } else {
       console.log('token does not exist');
     }
@@ -73,6 +79,7 @@ class App extends React.Component {
     this.setState({
       user: userdata
     });
+    this.getFavorites(userdata['id']);
   }
   /*=======================
   grab the results from api calls and update app state
@@ -101,10 +108,6 @@ class App extends React.Component {
 
   }
   /*=======================
-  set current page in search results
-  =======================*/
-
-  /*=======================
   Logs the user out
   =======================*/
   logOut() {
@@ -116,7 +119,9 @@ class App extends React.Component {
     Cookies.remove('username');
     Cookies.remove('id');
   }
-
+  /*=======================
+  set current page in search results
+  =======================*/
   setPage (page) {
     console.log(page);
     this.setState({
@@ -177,6 +182,33 @@ class App extends React.Component {
     this.setState({
       favorites: tempFav
     })
+  }
+  /*=======================
+  Get users favorites
+  =======================*/
+  setFavorites(favorites) {
+    if (favorites.results.length > 0) {
+      this.setState({
+        favorites: favorites.results
+      })
+    }
+  }
+  /*=======================
+  Get users favorites
+  =======================*/
+  getFavorites(id) {
+    console.log('Calling get favorites', id);
+    fetch('/favorites/all/'+id, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => response.json())
+    .then(JSONdata => {
+      console.log('jsondata', JSONdata);
+      this.setFavorites(JSONdata);
+    }).catch(error => console.log(error))
+
   }
   /*=======================
   Update user's collection list

@@ -21,6 +21,7 @@ Rails.application.routes.draw do
 
   #Favorites actions
   post   '/favorites'     => 'favorites#create'
+  get    '/favorites/all/:id' => 'favorites#index'
 
   #Issue actions
   post   '/issues'     => 'issues#create'
