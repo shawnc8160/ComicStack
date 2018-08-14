@@ -60,40 +60,56 @@ class Rollout extends React.Component {
             </div>
           </form>
         </div>
+        <div class="results-container">
         {this.props.results.map((result, index) => {
-       return ( <div id="rolloutItem"
+       return ( <div id="rolloutItem" class="result-box"
                       onClick={() => {
                         this.props.toggleState('displayDetails');
                         this.props.setSelection(result);
                       }} index={index}>
                   {(result.resource_type == 'volume') ?
-                      <div>
-                        <h4>Comic Volume: {result.name}</h4>
-                        <img className="thumbnail" src={result.image.icon_url} />
-                        <p>Publisher: {result.publisher.name}</p>
-                        <p>Number of Issues: {result.count_of_issues}</p>
-                      </div>
+                    <div class="result-child">
+                      <span class="icon is-small showdetail-header-volumes">
+                        <i class="fas fa-book-reader"></i>
+                      </span>
+                      <span class="showdetail-header-volumes">Volume</span>
+                      <img className="thumbnail result-thumbnail" src={result.image.icon_url} />
+                      <h1 class="title">{result.name}</h1>
+                      <p class="result-details">Publisher: {result.publisher.name}</p>
+                      <p class="result-details"># of Issues: {result.count_of_issues}</p>
+                    </div>
                 : ''}
                {(result.resource_type == 'character') ?
-                      <div>
-                        <h4>Character: {result.name} ({result.publisher.name})</h4>
-                        <p>Gender: {(result.gender == 1)? <span>Male</span> : '' }{(result.gender == 2)? <span>Female</span>
+                      <div class="result-child">
+                        <span class="icon is-small showdetail-header-characters">
+                          <i class="far fa-user"></i>
+                        </span>
+                        <span class="showdetail-header-characters">Character</span>
+                        <img className="thumbnail result-thumbnail" src={result.image.icon_url} />
+                        <h1 class="title">{result.name}</h1>
+                        <h2 class="subtitle">({result.publisher.name})</h2>
+                        <p class="result-details">Gender: {(result.gender == 1)? <span>Male</span> : '' }{(result.gender == 2)? <span>Female</span>
                         : '' }{(result.gender == 0)? <span>Other/Both</span>
                         : '' }</p>
-                        <img src={result.image.icon_url} />
-                        <p>Total issue appearances: {result.count_of_issue_appearances}</p>
+                      <p class="result-details"># of Appearances: {result.count_of_issue_appearances}</p>
                       </div>
                 : ''}
                 {(result.resource_type == 'issue') ?
-                      <div>
-                         <h4>Issue: {result.volume.name} # {result.issue_number}: {result.name}</h4>
-                         <img src={result.image.icon_url} />
+                      <div class="result-child">
+                        <span class="icon is-small showdetail-header-issues">
+                          <i class="fas fa-book"></i>
+                        </span>
+                        <span class="showdetail-header-issues">Issue</span>
+                        <img className="thumbnail result-thumbnail" src={result.image.icon_url} />
+                        <h1 class="title">{result.volume.name}</h1>
+                        <h2 class="subtitle"># {result.issue_number}</h2>
+                        <h2 class="subtitle is-6">{result.name}</h2>
                       </div>
                  : ''}
-                 <hr></hr>
 
              </div>)//result div return
            })}
+      </div>
           <div id="pageCount">
             <div id="pagerDiv">
             Page: {(this.props.searchPage > 1)? <a href="#" id="back" onClick={this.paginate}> &lt; </a> : ''}{this.props.searchPage} of {this.props.pages} {(this.props.searchPage < this.props.pages)? <a id="next" href="#" onClick={this.paginate}> &gt; </a> : ''}
@@ -106,8 +122,9 @@ class Rollout extends React.Component {
                 <input type="submit" value="Jump" />
               </div>
             </form>
+            </div>
           </div>
-      </div>
+
     )
   }
 }
