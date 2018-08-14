@@ -21,4 +21,10 @@ Rails.application.routes.draw do
 
   #Favorites actions
   post   '/favorites'     => 'favorites#create'
+
+  #Issue actions
+  post   '/issues'     => 'issues#create'
+
+  #Owns actions
+  post   '/owns'     => 'owns#create'
 end

@@ -4,6 +4,8 @@ class ShowDetail extends React.Component {
     this.addCollection = this.addCollection.bind(this)
     this.characterSubmit = this.characterSubmit.bind(this)
     this.favoriteSubmit = this.favoriteSubmit.bind(this)
+    this.issueSubmit = this.issueSubmit.bind(this)
+    this.ownsSubmit = this.ownsSubmit.bind(this)
   }
   /*=======================
   submit favorite linking table to characters in the database
@@ -26,10 +28,10 @@ class ShowDetail extends React.Component {
       .catch(error => console.log(error))
   }
   /*=======================
-  submit hero object to be added to database(returns exiting object back if already in database)
+  submit character object to be added to database(returns exiting object back if already in database)
   =======================*/
   characterSubmit (character) {
-    //send hero object to heroes database
+    //send character object to heroes database
     fetch('/characters', {
       body: JSON.stringify(character),
       method: 'POST',
@@ -52,13 +54,61 @@ class ShowDetail extends React.Component {
       .catch(error => console.log(error))
   }
   /*=======================
+  submit ownership linking table to issues in the database
+  =======================*/
+  ownsSubmit (newOwn) {
+    fetch('/owns', {
+      body: JSON.stringify(newOwn),
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(createdOwn => {
+        return createdOwn.json()
+      })
+      .then(jsonedOwn => {
+        console.log('owns entry completed');
+      })
+      .catch(error => console.log(error))
+  }
+  /*=======================
+  submit issue object to be added to database(returns exiting object back if already in database)
+  =======================*/
+  issueSubmit (issue) {
+    console.log(issue);
+    //send hero object to heroes database
+    fetch('/issues', {
+      body: JSON.stringify(issue),
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(createdIssue => {
+        return createdIssue.json()
+      })
+      .then(jsonedIss => {
+        this.props.collectionUpdate(jsonedIss)
+        let newOwn = {
+          user_id: this.props.user.id,
+          issue_id: jsonedIss.id
+        }
+        this.ownsSubmit(newOwn)
+      })
+      .catch(error => console.log(error))
+  }
+  /*=======================
   Add to collection
     -- checks for character/volume
     -- adds to the appropriate collection
   =======================*/
   addCollection() {
+    //check is the selection to add is a character:
     if (this.props.selection.resource_type === 'character') {
-      // parse the selection's deck for single quotes
+      // parse the character's deck for single quotes
       if (this.props.selection.deck != null) {
         let thisDeck = this.props.selection.deck
         let cleanString = thisDeck.replace(/'/g,'');
@@ -86,7 +136,41 @@ class ShowDetail extends React.Component {
         }
         this.characterSubmit(character)
       }
-    }//if character
+    }//end of if character
+    else {
+      // parse the issue's description for single quotes
+      if (this.props.selection.description != null) {
+        let thisDesc = this.props.selection.description
+        let cleanString = thisDesc.replace(/'/g,'');
+        let thisName = this.props.selection.name
+        let cleanName = thisName.replace(/'/g,'');
+        let thisissue = {
+          id: this.props.selection.id,
+          name: cleanName,
+          description: cleanString,
+          issue_number: this.props.selection.issue_number,
+          icon_url: this.props.selection.image.icon_url,
+          volume_id: this.props.selection.volume.id,
+          volume_name: this.props.selection.volume.name,
+          resource_type: this.props.selection.resource_type
+        }
+        this.issueSubmit(thisissue)
+      }
+      else {
+        let thisName = this.props.selection.name
+        let cleanName = thisName.replace(/'/g,'');
+        let thisissue = {
+          id: this.props.selection.id,
+          name: cleanName,
+          issue_number: this.props.selection.issue_number,
+          icon_url: this.props.selection.image.icon_url,
+          volume_id: this.props.selection.volume_id,
+          volume_name: this.props.selection.volume_name,
+          resource_type: this.props.selection.resource_type
+        }
+        this.issueSubmit(thisissue)
+      }
+    }//end of if issue
   }//end of addCollection method
   render() {
     return (
@@ -122,7 +206,12 @@ class ShowDetail extends React.Component {
             </div>
           </section>
           <footer class="modal-card-foot">
+          {(this.props.selection.resource_type == 'character')?
             <Favorite addCollection={this.addCollection}></Favorite>
+            : '' }
+          {(this.props.selection.resource_type == 'issue')?
+            <Collect addCollection={this.addCollection}></Collect>
+            : '' }
           </footer>
         </div>
       </div>

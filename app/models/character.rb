@@ -34,7 +34,7 @@ class Character
                   '#{thisChar["deck"] ? thisChar["deck"] : "NULL"}}',
                   '#{thisChar["publisher"]}',
                    #{thisChar["gender"]},
-                  '#{thisChar["icon_url"]}',
+                  '#{thisChar["icon_url"] ?  thisChar["icon_url"] : "NULL"}}',
                   '#{thisChar["real_name"]}',
                   '#{thisChar["resource_type"]}' )
             RETURNING id, name, deck, publisher, gender, icon_url, real_name, resource_type;
