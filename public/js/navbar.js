@@ -33,8 +33,8 @@ class NavBar extends React.Component{
             <div class="navbar-item ">
               <SearchForm grabResults={this.props.grabResults}/>
             </div>
-            <div class="navbar-item has-dropdown is-hoverable login">
-              <a class="navbar-link">
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link login">
                 {(this.props.user != null) ? this.props.user.username : "Not Logged In"}
                 <span class="icon is-large">
                   <i class="fas fa-lg fa-user-circle">
