@@ -57,6 +57,7 @@ class ShowDetail extends React.Component {
     -- adds to the appropriate collection
   =======================*/
   addCollection() {
+    //check is the selection to add is a character:
     if (this.props.selection.resource_type === 'character') {
       // parse the selection's deck for single quotes
       if (this.props.selection.deck != null) {
