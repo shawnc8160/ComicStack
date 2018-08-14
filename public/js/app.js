@@ -214,7 +214,7 @@ class App extends React.Component {
             ? <ShowDetail
               toggleState={this.toggleState}
               selection={this.state.selection} favorites={this.state.favorites}
-              favoriteUpdate={this.favoriteUpdate}
+              favoriteUpdate={this.favoriteUpdate} user={this.state.user}
               />
             : null
           }

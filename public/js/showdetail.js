@@ -3,6 +3,27 @@ class ShowDetail extends React.Component {
     super(props);
     this.addCollection = this.addCollection.bind(this)
     this.characterSubmit = this.characterSubmit.bind(this)
+    this.favoriteSubmit = this.favoriteSubmit.bind(this)
+  }
+  /*=======================
+  submit favorite linking table to characters in the database
+  =======================*/
+  favoriteSubmit (newFave) {
+    fetch('/favorites', {
+      body: JSON.stringify(newFave),
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(createdFave => {
+        return createdFave.json()
+      })
+      .then(jsonedFave => {
+        console.log('favorite entry completed');
+      })
+      .catch(error => console.log(error))
   }
   /*=======================
   submit hero object to be added to database(returns exiting object back if already in database)
@@ -21,9 +42,12 @@ class ShowDetail extends React.Component {
         return createdHero.json()
       })
       .then(jsonedChar => {
-        console.log(jsonedChar);
         this.props.favoriteUpdate(jsonedChar)
-        //call the linkfavorite
+        let newFave = {
+          user_id: this.props.user.id,
+          character_id: jsonedChar.id
+        }
+        this.favoriteSubmit(newFave)
       })
       .catch(error => console.log(error))
   }

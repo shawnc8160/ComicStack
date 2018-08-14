@@ -18,4 +18,7 @@ Rails.application.routes.draw do
 
   #Character actions
   post   '/characters'     => 'characters#create'
+
+  #Favorites actions
+  post   '/favorites'     => 'favorites#create'
 end
