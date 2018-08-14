@@ -7,8 +7,12 @@ body {
 }
 
 /* Nav Bar */
-.fas:hover {
-  color: red;
+.login:hover i{
+  color: rgb(31,195,167);
+}
+
+.logo {
+  color: white;
 }
 /* app.js css */
 
