@@ -28,6 +28,8 @@ class App extends React.Component {
     this.getFavorites = this.getFavorites.bind(this)
     this.collectionUpdate = this.collectionUpdate.bind(this)
     this.setFavorites = this.setFavorites.bind(this)
+    this.getCollection = this.getCollection.bind(this)
+    this.setCollection = this.setCollection.bind(this)
   }
   /*=======================
   Things to check for when page first loads
@@ -39,6 +41,7 @@ class App extends React.Component {
       this.getCookieData()
     } else {
       this.getFavorites(this.state.user.id)
+      this.getCollection(this.state.user.id)
     }
   }
   /*=======================
@@ -60,6 +63,7 @@ class App extends React.Component {
       })
       console.log('Got cookie data, state is', this.state);
       this.getFavorites(userData['id']);
+      this.getCollection(userData['id']);
     } else {
       console.log('token does not exist');
     }
@@ -80,6 +84,7 @@ class App extends React.Component {
       user: userdata
     });
     this.getFavorites(userdata['id']);
+    this.getCollection(userdata['id']);
   }
   /*=======================
   grab the results from api calls and update app state
@@ -113,7 +118,9 @@ class App extends React.Component {
   logOut() {
     console.log('Logging Out');
     this.setState({
-      user: null
+      user: null,
+      favorites: null,
+      collection: null
     });
     Cookies.remove('token');
     Cookies.remove('username');
@@ -184,12 +191,22 @@ class App extends React.Component {
     })
   }
   /*=======================
-  Get users favorites
+  Set users favorites
   =======================*/
   setFavorites(favorites) {
     if (favorites.results.length > 0) {
       this.setState({
         favorites: favorites.results
+      })
+    }
+  }
+  /*=======================
+  Set users collection
+  =======================*/
+  setCollection(collection) {
+    if (collection.results.length > 0) {
+      this.setState({
+        collection: collection.results
       })
     }
   }
@@ -207,6 +224,23 @@ class App extends React.Component {
     .then(JSONdata => {
       console.log('jsondata', JSONdata);
       this.setFavorites(JSONdata);
+    }).catch(error => console.log(error))
+
+  }
+  /*=======================
+  Get users collection
+  =======================*/
+  getCollection(id) {
+    console.log('Calling get collection', id);
+    fetch('/owns/'+id, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => response.json())
+    .then(JSONdata => {
+      console.log('jsondata', JSONdata);
+      this.setCollection(JSONdata);
     }).catch(error => console.log(error))
 
   }

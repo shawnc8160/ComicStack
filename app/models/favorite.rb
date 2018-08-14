@@ -59,22 +59,6 @@ class Favorite
               where favorites.user_id = #{id};
           SQL
       )
-      puts "=================="
-      p 'Getting favorites, user_id is ' + id
-
-      arr = []
-      results.map do |result|
-        arr.push(result)
-      end
-
-      puts "=================="
-
-      puts "=================="
-
-      newObject = { "results" => arr }
-      p newObject
-
-      puts "=================="
       return {
         "results" => results
       }
