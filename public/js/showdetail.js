@@ -91,31 +91,41 @@ class ShowDetail extends React.Component {
   }//end of addCollection method
   render() {
     return (
-      <div class="show-container">
-        <button onClick={() => {this.props.toggleState('displayDetails', 'displayList');}}>Back To Results</button>
-        <Favorite addCollection={this.addCollection}></Favorite>
-        <h1>
-          {
-            (this.props.selection.resource_type=="issue")
-            ? "Issue: " + this.props.selection.volume.name + " " + this.props.selection.issue_number
-            : (this.props.selection.resource_type=="character")
-              ? "Character: " + this.props.selection.name
-              : "Volume: " + this.props.selection.name
-          }
-        </h1>
+      <div class="modal is-active">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+          <header class="modal-card-head">
 
-        <img src={this.props.selection.image.medium_url} />
-        <h2>
-          {
-            (this.props.selection.resource_type=="issue")
-            ? "Cover Date: " + this.props.selection.cover_date
-            : (this.props.selection.resource_type=="character")
-              ? "Real Name: " + this.props.selection.real_name
-              : "Start Year: " + this.props.selection.start_year
-          }
-        </h2>
-        <h2>Description:</h2>
-        <div dangerouslySetInnerHTML={{ __html: this.props.selection.description }} />
+              {
+                (this.props.selection.resource_type=="issue")
+                ? <div class="modal-card-title"><span class="icon is-small showdetail-header"><i class="fas fa-book"></i></span><span class="showdetail-header">Issue</span><h1 class="title"> {this.props.selection.name}</h1></div>
+                : (this.props.selection.resource_type=="character")
+                  ? <div class="modal-card-title"><span class="icon is-small showdetail-header"><i class="far fa-user"></i></span><span class="showdetail-header">Character</span><h1 class="title"> {this.props.selection.name}</h1></div>
+                  : <div class="modal-card-title"><span class="icon is-small showdetail-header"><i class="fas fa-book-reader"></i></span><span class="showdetail-header">Volume</span><h1 class="title"> {this.props.selection.name}</h1></div>
+              }
+
+            <button class="delete" aria-label="close" onClick={() => this.props.toggleState('displayDetails')}></button>
+          </header>
+          <section class="modal-card-body">
+            <img class="showdetail-img" src={this.props.selection.image.medium_url} />
+            <div class="show-detail-info">
+              {
+                (this.props.selection.resource_type=="issue")
+                ? <div class="show-detail-section"><h2 class="show-detail-label">Cover Date</h2><span>{this.props.selection.cover_date}</span></div>
+                : (this.props.selection.resource_type=="character")
+                  ? <div class="show-detail-section"><h2 class="show-detail-label">Real Name</h2><span>{this.props.selection.real_name}</span></div>
+                  : <div class="show-detail-section"><h2 class="show-detail-label">Start Year</h2><span>{this.props.selection.start_year}</span></div>
+              }
+              <div class="show-detail-section">
+                <h2 class="show-detail-label">Description:</h2>
+                <div dangerouslySetInnerHTML={{ __html: this.props.selection.description }} />
+              </div>
+            </div>
+          </section>
+          <footer class="modal-card-foot">
+            <Favorite addCollection={this.addCollection}></Favorite>
+          </footer>
+        </div>
       </div>
     )
   }
