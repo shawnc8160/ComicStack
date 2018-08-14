@@ -34,14 +34,52 @@ body {
 #pagerDiv {
   max-width: 150px;
 }
+
+.results-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.result-box {
+  width: 315px;
+  padding: 20px;
+  margin: 15px 0;
+  border: 1px solid #e8e8e8;
+  cursor: pointer;
+}
+
+.result-box:hover {
+  box-shadow: 3px 5px 9px #888888;
+}
+
+.result-details {
+  font-size: 12px;
+}
+
+
+.result-thumbnail {
+  float:right;
+  margin: 10px;
+}
 /* Favorite component */
 #favoriteDiv{
   /* formatted to view purposes in development. need to change on final */
 }
 
 /* ShowDetail Component */
-.showdetail-header {
+.showdetail-header-volumes {
   color: rgb(31,195,167);
+  font-size: 14px;
+}
+
+.showdetail-header-issues {
+  color: rgb(30, 126, 195);
+  font-size: 14px;
+}
+
+.showdetail-header-characters {
+  color: rgb(229, 150, 66);
   font-size: 14px;
 }
 
