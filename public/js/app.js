@@ -364,6 +364,7 @@ class App extends React.Component {
       })
   }
   deleteFromCollection (issue, index) {
+    console.log('Deleting from collection', issue, index);
     let thisID = 0
     if (issue.issue_id) {
       thisID = issue.issue_id
@@ -371,13 +372,13 @@ class App extends React.Component {
     else {
       thisID = issue.id
     }
-    fetch('issues/' + thisID,
+    fetch('owns/' + thisID,
       {
         method: 'DELETE'
       })
       .then(data => {
         this.setState({
-          favorites: [
+          collection: [
             ...this.state.collection.slice(0, index),
             ...this.state.collection.slice(index + 1)
           ]
@@ -426,6 +427,11 @@ class App extends React.Component {
           {
             (this.state.displayCollection)
             ? <Collection
+              collection={this.state.collection}
+              setSelection={this.setSelection}
+              toggleState={this.toggleState}
+              Owned={this.Owned}
+              deleteFromCollection={this.deleteFromCollection}
               />
             : null
           }

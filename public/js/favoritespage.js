@@ -50,9 +50,11 @@ class FavoritesPage extends React.Component {
                     </span>
                   </td>
                   <td>
+                    <div className="description_column">
                     <span className="deck_list">
                       {(favorite.deck && favorite.deck.trim().length > 0) ? favorite.deck : "No description available"}
                     </span>
+                    </div>
                   </td>
                   <td>{(favorite.publisher && favorite.publisher.trim().length > 0) ? favorite.publisher : "No publisher available"}</td>
                   <td><i onClick={() => this.props.deleteFavorite(favorite, index)} class="fas fa-trash"></i></td>

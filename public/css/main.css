@@ -101,6 +101,12 @@ body {
   min-width: 120px;
 }
 
+/* Collections list */
+.description_column {
+  max-height: 100px;
+  overflow: scroll;
+}
+
 /* ShowDetail Component */
 .showdetail-header-volumes {
   color: rgb(31,195,167);
@@ -135,4 +141,10 @@ body {
 .show-detail-section {
   margin: 10px;
   margin-bottom: 15px;
+}
+
+.modal-title-container {
+  max-width: 550px;
+  max-height: 120px;
+  overflow: scroll;
 }
