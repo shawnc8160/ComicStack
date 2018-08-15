@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   #Favorites actions
   post   '/favorites'     => 'favorites#create'
   get    '/favorites/all/:id' => 'favorites#index'
+  delete '/favorites/:id' => 'favorites#delete'
 
   #Issue actions
   post   '/issues'     => 'issues#create'

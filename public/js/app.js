@@ -36,6 +36,7 @@ class App extends React.Component {
     this.resetOwn = this.resetOwn.bind(this)
     this.getCollection = this.getCollection.bind(this)
     this.setCollection = this.setCollection.bind(this)
+    this.deleteFavorite = this.deleteFavorite.bind(this)
   }
   /*=======================
   Things to check for when page first loads
@@ -325,6 +326,30 @@ class App extends React.Component {
     this.setState({
       collection: tempIss,
       isOwned: true
+    })
+  }
+  /*=======================
+  delete Favorites
+  =======================*/
+  deletefavorite (character, index) {
+    let thisID = 0;
+    if (character.character_id) {
+      thisID = character.character_id;
+    }
+    else {
+      thisID = character.id
+    }
+  fetch('favorites/' + thisID,
+    {
+      method: 'DELETE'
+    })
+    .then(data => {
+      this.setState({
+        favorites: [
+          ...this.state.favorites.slice(0, index),
+          ...this.state.favorites.slice(index + 1)
+        ]
+      })
     })
   }
   render () {

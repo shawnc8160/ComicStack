@@ -63,4 +63,11 @@ class Favorite
         "results" => results
       }
     end
+
+    # delete one (by id)
+    def self.delete(id)
+      results = DB.exec("DELETE FROM favorites WHERE id=#{id};")
+      return { deleted: true }
+    end
+
 end
