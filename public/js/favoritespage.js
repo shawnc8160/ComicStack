@@ -54,7 +54,7 @@ class FavoritesPage extends React.Component {
                     </span>
                   </td>
                   <td>{(favorite.publisher && favorite.publisher.trim().length > 0) ? favorite.publisher : "No publisher available"}</td>
-                  <td><i class="fas fa-trash"></i></td>
+                  <td><i onClick={() => this.props.deleteFavorite(favorite, index)} class="fas fa-trash"></i></td>
                 </tr>
               )
             })}
