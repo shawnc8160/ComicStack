@@ -13,7 +13,7 @@ class App extends React.Component {
       displayDetails: false,
       displayList: true,
       favorites: [],
-      isFavorite: false,
+      isOwned: false,
       collection: [],
       displayLogin: false,
       displayRegister: false,
@@ -26,11 +26,13 @@ class App extends React.Component {
     this.toggleState = this.toggleState.bind(this)
     this.setSelection = this.setSelection.bind(this)
     this.checkFaves = this.checkFaves.bind(this)
+    this.checkCollection = this.checkCollection.bind(this)
     this.setPage = this.setPage.bind(this)
     this.favoriteUpdate = this.favoriteUpdate.bind(this)
     this.getFavorites = this.getFavorites.bind(this)
     this.collectionUpdate = this.collectionUpdate.bind(this)
     this.setFavorites = this.setFavorites.bind(this)
+    this.resetOwn = this.resetOwn.bind(this)
     this.getCollection = this.getCollection.bind(this)
     this.setCollection = this.setCollection.bind(this)
   }
@@ -51,16 +53,37 @@ class App extends React.Component {
   checks current usuer's current favorites
   =======================*/
   checkFaves (favorites, character_id) {
-    console.log(favorites.length);
     for (let i = 0; i < favorites.length; i++) {
-      if(favorites[i].id == character_id) {
-        console.log('isFavorite set to true');
+      if(favorites[i].character_id == character_id) {
+        console.log('isOwned set to true');
         this.setState({
-          isFavorite: true
+          isOwned: true
         })
         break;
       }
     }
+  }
+  /*=======================
+  checks current usuer's current collection for selection match
+  =======================*/
+  checkCollection (collection, issue_id) {
+    for (let i = 0; i < collection.length; i++) {
+      if(collection[i].issue_id == issue_id) {
+        console.log('isOwned set to true');
+        this.setState({
+          isOwned: true
+        })
+        break;
+      }
+    }
+  }
+  /*=======================
+  resets isOwned on showdetail close
+  =======================*/
+  resetOwn() {
+    this.setState({
+      isOwned: false
+    })
   }
   /*=======================
   Gets user data from cookies
@@ -213,6 +236,7 @@ class App extends React.Component {
       toUpdate[key] = !this.state[key]
     }
     this.setState(toUpdate)
+    this.resetOwn();
   }
 
   /*=======================
@@ -230,7 +254,8 @@ class App extends React.Component {
     let tempFav = this.state.favorites;
     tempFav.push(character)
     this.setState({
-      favorites: tempFav
+      favorites: tempFav,
+      isOwned: true
     })
   }
   /*=======================
@@ -294,7 +319,8 @@ class App extends React.Component {
     let tempIss = this.state.collection;
     tempIss.push(issue)
     this.setState({
-      collection: tempIss
+      collection: tempIss,
+      isOwned: true
     })
   }
   render () {
@@ -339,7 +365,8 @@ class App extends React.Component {
               selection={this.state.selection} favorites={this.state.favorites}
               favoriteUpdate={this.favoriteUpdate}
               checkFaves={this.checkFaves}
-              isFavorite={this.state.isFavorite}
+              checkCollection={this.checkCollection}
+              isOwned={this.state.isOwned}
               user={this.state.user}
               collection={this.state.collection}
               collectionUpdate={this.collectionUpdate}
