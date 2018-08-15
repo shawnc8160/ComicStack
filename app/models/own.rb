@@ -66,7 +66,7 @@ class Own
 
     # delete one (by id)
     def self.delete(id)
-      results = DB.exec("DELETE FROM owns WHERE id=#{id};")
+      results = DB.exec("DELETE FROM owns WHERE issue_id=#{id};")
       return { deleted: true }
     end
 
