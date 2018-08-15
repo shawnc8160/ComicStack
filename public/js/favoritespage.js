@@ -30,7 +30,7 @@ class FavoritesPage extends React.Component {
       <div>
 
         <h1 class="title">My Favorites</h1>
-        <table class="table is-hoverable">
+        <table class="table is-hoverable is-fullwidth">
           <thead>
             <th></th>
             <th>Name</th>
@@ -42,7 +42,7 @@ class FavoritesPage extends React.Component {
             {this.props.favorites.map((favorite, index) => {
               return (
                 <tr>
-                  <td> <img onClick={()=>this.getFavorite(favorite)} className="icon_list" src={favorite.icon_url}/> </td>
+                  <td className="image-column"> <img onClick={()=>this.getFavorite(favorite)} className="image is-96x96" src={favorite.icon_url}/> </td>
                   <td>
                     <span className="name_list" onClick={()=>this.getFavorite(favorite)}>
                       {(favorite.name && favorite.name.trim().length > 0) ? favorite.name : "Unnamed"}
