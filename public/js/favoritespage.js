@@ -23,6 +23,7 @@ class FavoritesPage extends React.Component {
       data.results[0]['resource_type'] = 'character'
       this.props.setSelection(data.results[0]);
       this.props.toggleState('displayDetails');
+      this.props.Owned();
     }
   }
   render() {

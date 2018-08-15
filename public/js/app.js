@@ -41,6 +41,7 @@ class App extends React.Component {
     this.deleteFavorite = this.deleteFavorite.bind(this)
     this.deleteFromCollection = this.deleteFromCollection.bind(this)
     this.displayList = this.displayList.bind(this)
+    this.Owned = this.Owned.bind(this)
   }
   /*=======================
   Things to check for when page first loads
@@ -89,6 +90,11 @@ class App extends React.Component {
   resetOwn() {
     this.setState({
       isOwned: false
+    })
+  }
+  Owned() {
+    this.setState({
+      isOwned: true
     })
   }
   /*=======================
@@ -431,6 +437,7 @@ class App extends React.Component {
               setSelection={this.setSelection}
               toggleState={this.toggleState}
               deleteFavorite={this.deleteFavorite}
+              Owned={this.Owned}
               />
             : null
           }
