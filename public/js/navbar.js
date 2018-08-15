@@ -43,6 +43,7 @@ class NavBar extends React.Component{
                 {
                   (this.props.user != null)
                   ? <div class="navbar-dropdown">
+                      <a class="navbar-item" onClick={()=> this.props.toggleState('displayEditProfile')}>Edit Profile</a>
                       <a class="navbar-item" onClick={()=> this.props.logOut()}>Logout</a>
                     </div>
                   : <div class="navbar-dropdown">

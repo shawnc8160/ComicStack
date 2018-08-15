@@ -19,6 +19,11 @@ body {
 /* User component */
 
 /* LoginForm component */
+.form {
+  padding: 10%;
+  border: 1px solid lightgrey;
+  background: rgb(255, 255, 255);
+}
 
 /* RegisterForm component */
 
