@@ -40,6 +40,9 @@ class EditForm extends React.Component {
   }
   render() {
     return (
+      <div class="modal is-active">
+      <div onClick={()=> this.props.toggleState('displayEditProfile')} class="modal-background"></div>
+      <div class="modal-content">
       <form class="form" onSubmit={this.handleSubmit}>
         <h1 class="title"> Edit Profile </h1>
         <div class="field is-horizontal">
@@ -70,6 +73,9 @@ class EditForm extends React.Component {
         </div>
         <a class="button is-danger" onClick={()=>{this.props.toggleState('displayEditProfile'); this.props.handleDelete()}}>Delete My Account</a>
       </form>
+    </div>
+      <button onClick={()=> this.props.toggleState('displayEditProfile')} class="modal-close is-large" aria-label="close"></button>
+      </div>
     )
   }
 }
