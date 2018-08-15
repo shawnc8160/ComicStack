@@ -41,9 +41,9 @@ class Query
       fieldlist = "resource_type,id,name,deck,description,publisher,gender,image,real_name,description,issue_number,volume,cover_date,start_year,count_of_issue_apperances,count_of_issues,site_detail_url,count_of_issue_appearances"
 
       #change query depending on resource_type
-      if resource_type = 'issues'
+      if resource_type == 'issues'
         response = HTTP.get("https://comicvine.gamespot.com/api/issues/?api_key=77adb7cc22c5f88e682b0d4bd106ce79571f9cde&filter=id:" + id + "&field_list=" + fieldlist + "&format=json")
-      elsif resource_type = 'characters'
+      elsif resource_type == 'characters'
         response = HTTP.get("https://comicvine.gamespot.com/api/characters/?api_key=77adb7cc22c5f88e682b0d4bd106ce79571f9cde&filter=id:" + id + "&field_list=" + fieldlist + "&format=json")
       else
         response = HTTP.get("https://comicvine.gamespot.com/api/issues/?api_key=77adb7cc22c5f88e682b0d4bd106ce79571f9cde&filter=volume:" + id + "&field_list=" + fieldlist + "&format=json")

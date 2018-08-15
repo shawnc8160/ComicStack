@@ -31,4 +31,5 @@ Rails.application.routes.draw do
   #Owns actions
   post   '/owns'     => 'owns#create'
   get    '/owns/:id'     => 'owns#show'
+  delete '/owns/:id' => 'owns#delete'
 end

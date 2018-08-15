@@ -37,6 +37,7 @@ class App extends React.Component {
     this.getCollection = this.getCollection.bind(this)
     this.setCollection = this.setCollection.bind(this)
     this.deleteFavorite = this.deleteFavorite.bind(this)
+    this.deleteFromCollection = this.deleteFromCollection.bind(this)
   }
   /*=======================
   Things to check for when page first loads
@@ -328,29 +329,47 @@ class App extends React.Component {
       isOwned: true
     })
   }
-  /*=======================
-  delete Favorites
-  =======================*/
-  deletefavorite (character, index) {
-    let thisID = 0;
+  deleteFavorite (character, index) {
+    let thisID = 0
     if (character.character_id) {
-      thisID = character.character_id;
+      thisID = character.character_id
     }
     else {
       thisID = character.id
     }
-  fetch('favorites/' + thisID,
-    {
-      method: 'DELETE'
-    })
-    .then(data => {
-      this.setState({
-        favorites: [
-          ...this.state.favorites.slice(0, index),
-          ...this.state.favorites.slice(index + 1)
-        ]
+    fetch('favorites/' + thisID,
+      {
+        method: 'DELETE'
       })
-    })
+      .then(data => {
+        this.setState({
+          favorites: [
+            ...this.state.favorites.slice(0, index),
+            ...this.state.favorites.slice(index + 1)
+          ]
+        })
+      })
+  }
+  deleteFromCollection (issue, index) {
+    let thisID = 0
+    if (issue.issue_id) {
+      thisID = issue.issue_id
+    }
+    else {
+      thisID = issue.id
+    }
+    fetch('issues/' + thisID,
+      {
+        method: 'DELETE'
+      })
+      .then(data => {
+        this.setState({
+          favorites: [
+            ...this.state.collection.slice(0, index),
+            ...this.state.collection.slice(index + 1)
+          ]
+        })
+      })
   }
   render () {
     return (

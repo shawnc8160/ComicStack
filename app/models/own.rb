@@ -63,4 +63,11 @@ class Own
         "results" => results
       }
     end
+
+    # delete one (by id)
+    def self.delete(id)
+      results = DB.exec("DELETE FROM owns WHERE id=#{id};")
+      return { deleted: true }
+    end
+
 end
