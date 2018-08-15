@@ -5,6 +5,7 @@ class SearchForm extends React.Component {
   }
   getResults () {
     event.preventDefault();
+    this.props.displayList();
     let query = this.refs.query.value
     let filter = this.refs.filter.value
     fetch('/queries/' + query + '/' + filter + '/1')
