@@ -32,7 +32,10 @@ class LoginForm extends React.Component {
   }
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+    <div class="modal">
+    <div class="modal-background"></div>
+      <form class="form" onSubmit={this.handleSubmit}>
+        <h1 class="title"> Login </h1>
         <div class="field is-horizontal">
           <div class="field-body">
             <div class="field">
@@ -60,6 +63,7 @@ class LoginForm extends React.Component {
           </div>
         </div>
       </form>
+    </div>
     )
   }
 }

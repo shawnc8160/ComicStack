@@ -9,6 +9,15 @@ class EditForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   /*=======================
+  Set values to logged in user data
+  =======================*/
+  componentDidMount () {
+    this.setState({
+      email: this.props.userData.email,
+      username: this.props.userData.username
+    })
+  }
+  /*=======================
   This method sets state to whatever user typed in form
   =======================*/
   handleChange(event) {
@@ -19,20 +28,20 @@ class EditForm extends React.Component {
   =======================*/
   handleSubmit(event) {
     event.preventDefault();
-    let registerData = {
+    let userData = {
       user: {
         username: this.state.username,
-        password: this.state.password,
         email: this.state.email
       }
     }
-    console.log('Calling handleRegister', registerData);
-    this.props.toggleState('displayRegister');
-    this.props.handleRegister(registerData);
+    console.log('Calling handleUpdate', userData);
+    this.props.toggleState('displayEditProfile');
+    this.props.handleEdit(userData);
   }
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form class="form" onSubmit={this.handleSubmit}>
+        <h1 class="title"> Edit Profile </h1>
         <div class="field is-horizontal">
           <div class="field-body">
             <div class="field">
@@ -54,11 +63,12 @@ class EditForm extends React.Component {
             <div class='field'>
               <p class="control">
                 <input class="button is-success" type="submit"/>
-                <button onClick={()=> this.props.toggleState('displayRegister')} class="button is-danger">Cancel</button>
+                <button onClick={()=> this.props.toggleState('displayEditProfile')} class="button is-danger">Cancel</button>
               </p>
             </div>
           </div>
         </div>
+        <a class="button is-danger" onClick={()=>{this.props.toggleState('displayEditProfile'); this.props.handleDelete()}}>Delete My Account</a>
       </form>
     )
   }

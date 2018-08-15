@@ -33,7 +33,8 @@ class RegisterForm extends React.Component {
   }
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form class="form" onSubmit={this.handleSubmit}>
+        <h1 class="title"> Register </h1>
         <div class="field is-horizontal">
           <div class="field-body">
             <div class="field">

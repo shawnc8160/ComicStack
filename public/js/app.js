@@ -50,11 +50,12 @@ class App extends React.Component {
   =======================*/
   getCookieData() {
     console.log('Checking for cookies');
-    if(Cookies.get('token') && Cookies.get('id') && Cookies.get('username')) {
+    if(Cookies.get('token') && Cookies.get('id') && Cookies.get('username') && Cookies.get('email')) {
       console.log('token exists');
       // Format user data
       let userData = {
         username: Cookies.get('username'),
+        email: Cookies.get('email'),
         id: Cookies.get('id'),
         token: Cookies.get('token')
       }
@@ -79,6 +80,7 @@ class App extends React.Component {
     // Sets userdata into cookie
     Cookies.set('token', token);
     Cookies.set('username', userdata['username']);
+    Cookies.set('email', userdata['email']);
     Cookies.set('id', userdata['id']);
     console.log('Cookie is set', Cookies.get('token'));
     this.setState({
@@ -155,6 +157,7 @@ class App extends React.Component {
     // Sets userdata into cookie
     Cookies.set('token', token);
     Cookies.set('username', userdata['username']);
+    Cookies.set('email', userdata['email']);
     Cookies.set('id', userdata['id']);
     console.log('Cookie is set', Cookies.get('token'));
     this.setState({
@@ -267,8 +270,10 @@ class App extends React.Component {
         />
         <div class="container">
           {
-            (this.state.displayLogin || this.state.displayRegister)
-            ? <User setUser={this.setUser} displayLogin={this.state.displayLogin} displayRegister={this.state.displayRegister} toggleState={this.toggleState}/>
+            (this.state.displayLogin || this.state.displayRegister || this.state.displayEditProfile)
+            ? <User setUser={this.setUser} displayLogin={this.state.displayLogin} displayRegister={this.state.displayRegister} displayEditProfile={this.state.displayEditProfile} toggleState={this.toggleState}
+            userData={this.state.user}
+            logOut={this.logOut}/>
             : null
           }
           {
