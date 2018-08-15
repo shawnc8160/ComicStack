@@ -41,7 +41,7 @@ class FavoritesPage extends React.Component {
             {this.props.favorites.map((favorite, index) => {
               return (
                 <tr>
-                  <td> <img className="icon_list" src={favorite.icon_url}/> </td>
+                  <td> <img onClick={()=>this.getFavorite(favorite)} className="icon_list" src={favorite.icon_url}/> </td>
                   <td>
                     <span className="name_list" onClick={()=>this.getFavorite(favorite)}>
                       {(favorite.name && favorite.name.trim().length > 0) ? favorite.name : "Unnamed"}
