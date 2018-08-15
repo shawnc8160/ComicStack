@@ -38,6 +38,7 @@ class App extends React.Component {
     this.resetOwn = this.resetOwn.bind(this)
     this.getCollection = this.getCollection.bind(this)
     this.setCollection = this.setCollection.bind(this)
+    this.displayList = this.displayList.bind(this)
   }
   /*=======================
   Things to check for when page first loads
@@ -238,9 +239,18 @@ class App extends React.Component {
     this.setState(toUpdate)
     this.resetOwn();
   }
-
   /*=======================
-  Toggles any of the booleans in state
+  Shows the results list page (hides everything else)
+  =======================*/
+  displayList() {
+    this.setState({
+      displayList: true,
+      displayCollection: false,
+      displayFavorites: false,
+    })
+  }
+  /*=======================
+  Sets what the current selection is for details page
   =======================*/
   setSelection(selection) {
     this.setState({
@@ -334,6 +344,7 @@ class App extends React.Component {
           logOut={this.logOut}
           toggleState={this.toggleState}
           parseResults={this.parseResults}
+          displayList={this.displayList}
         />
         <div class="container">
           {
@@ -373,6 +384,8 @@ class App extends React.Component {
             (this.state.displayFavorites)
             ? <FavoritesPage
               favorites={this.state.favorites}
+              setSelection={this.setSelection}
+              toggleState={this.toggleState}
               />
             : null
           }

@@ -42,7 +42,8 @@ class NavBar extends React.Component{
           <div class="navbar-end">
             <div class="navbar-item ">
               <SearchForm grabResults={this.props.grabResults} parseResults={this.props.parseResults}
-              toggleState={this.props.toggleState}/>
+              toggleState={this.props.toggleState}
+              displayList={this.props.displayList}/>
             </div>
             <div class="navbar-item has-dropdown is-hoverable">
               <a class="navbar-link login">
