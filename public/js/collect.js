@@ -7,7 +7,11 @@ class Collect extends React.Component {
       <div id="CollectDiv">
         {(this.props.isOwned == false)? <button id="collectBtn" class="button is-primary is-hovered" onClick={this.props.addCollection}>
           ADD TO COLLECTION
-        </button> : <p>this issue is owned</p> }
+        </button>
+        :
+        <button id="collectBtn" class="button is-danger is-hovered">
+          YOU OWN THIS ISSUE
+        </button> }
       </div>
     )
   }

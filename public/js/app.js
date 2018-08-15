@@ -54,7 +54,7 @@ class App extends React.Component {
   =======================*/
   checkFaves (favorites, character_id) {
     for (let i = 0; i < favorites.length; i++) {
-      if(favorites[i].character_id == character_id) {
+      if(favorites[i].character_id == character_id || favorites[i].id == character_id) {
         console.log('isOwned set to true');
         this.setState({
           isOwned: true
@@ -68,7 +68,7 @@ class App extends React.Component {
   =======================*/
   checkCollection (collection, issue_id) {
     for (let i = 0; i < collection.length; i++) {
-      if(collection[i].issue_id == issue_id) {
+      if(collection[i].issue_id == issue_id || collection[i].id == issue_id) {
         console.log('isOwned set to true');
         this.setState({
           isOwned: true
@@ -355,6 +355,7 @@ class App extends React.Component {
                 searchPage={this.state.searchPage}
                 setPage={this.setPage}
                 parseResults={this.parseResults}>
+                favorites={this.state.favorites}
               </Rollout>
           }
 
