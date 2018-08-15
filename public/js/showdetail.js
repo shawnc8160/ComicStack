@@ -119,71 +119,77 @@ class ShowDetail extends React.Component {
     -- adds to the appropriate collection
   =======================*/
   addCollection() {
-    //check is the selection to add is a character:
-    if (this.props.selection.resource_type === 'character') {
-      // parse the character's deck for single quotes
-      if (this.props.selection.deck != null) {
-        let thisDeck = this.props.selection.deck
-        let cleanString = (thisDeck) ? thisDeck.replace(/'/g,'') : '';
-        let character = {
-          id: this.props.selection.id,
-          name: this.props.selection.name,
-          deck: cleanString,
-          publisher: this.props.selection.publisher.name,
-          gender: this.props.selection.gender,
-          icon_url: this.props.selection.image.icon_url,
-          real_name: this.props.selection.real_name,
-          resource_type: this.props.selection.resource_type
-        }
-        this.characterSubmit(character)
-      }
-      else {
-        let character = {
-          id: this.props.selection.id,
-          name: this.props.selection.name,
-          publisher: this.props.selection.publisher.name,
-          gender: this.props.selection.gender,
-          icon_url: this.props.selection.image.icon_url,
-          real_name: this.props.selection.real_name,
-          resource_type: this.props.selection.resource_type
-        }
-        this.characterSubmit(character)
-      }
-    }//end of if character
+    //check that user is logged in first
+    if(this.props.user == null) {
+      this.props.toggleState('displayDetails','displayLogin');
+    }
     else {
-      // parse the issue's description for single quotes
-      if (this.props.selection.description != null) {
-        let thisDesc = this.props.selection.description
-        let cleanString = (thisDesc) ? thisDesc.replace(/'/g,'') : '';
-        let thisName = this.props.selection.name
-        let cleanName = (thisName) ? thisName.replace(/'/g,'') : '';
-        let thisissue = {
-          id: this.props.selection.id,
-          name: cleanName,
-          description: cleanString,
-          issue_number: this.props.selection.issue_number,
-          icon_url: this.props.selection.image.icon_url,
-          volume_id: this.props.selection.volume.id,
-          volume_name: this.props.selection.volume.name,
-          resource_type: this.props.selection.resource_type
+      //check is the selection to add is a character:
+      if (this.props.selection.resource_type === 'character') {
+        // parse the character's deck for single quotes
+        if (this.props.selection.deck != null) {
+          let thisDeck = this.props.selection.deck
+          let cleanString = (thisDeck) ? thisDeck.replace(/'/g,'') : '';
+          let character = {
+            id: this.props.selection.id,
+            name: this.props.selection.name,
+            deck: cleanString,
+            publisher: this.props.selection.publisher.name,
+            gender: this.props.selection.gender,
+            icon_url: this.props.selection.image.icon_url,
+            real_name: this.props.selection.real_name,
+            resource_type: this.props.selection.resource_type
+          }
+          this.characterSubmit(character)
         }
-        this.issueSubmit(thisissue)
-      }
+        else {
+          let character = {
+            id: this.props.selection.id,
+            name: this.props.selection.name,
+            publisher: this.props.selection.publisher.name,
+            gender: this.props.selection.gender,
+            icon_url: this.props.selection.image.icon_url,
+            real_name: this.props.selection.real_name,
+            resource_type: this.props.selection.resource_type
+          }
+          this.characterSubmit(character)
+        }
+      }//end of if character
       else {
-        let thisName = this.props.selection.name
-        let cleanName = (thisName) ? thisName.replace(/'/g,'') : '';
-        let thisissue = {
-          id: this.props.selection.id,
-          name: cleanName,
-          issue_number: this.props.selection.issue_number,
-          icon_url: this.props.selection.image.icon_url,
-          volume_id: this.props.selection.volume_id,
-          volume_name: this.props.selection.volume_name,
-          resource_type: this.props.selection.resource_type
+        // parse the issue's description for single quotes
+        if (this.props.selection.description != null) {
+          let thisDesc = this.props.selection.description
+          let cleanString = (thisDesc) ? thisDesc.replace(/'/g,'') : '';
+          let thisName = this.props.selection.name
+          let cleanName = (thisName) ? thisName.replace(/'/g,'') : '';
+          let thisissue = {
+            id: this.props.selection.id,
+            name: cleanName,
+            description: cleanString,
+            issue_number: this.props.selection.issue_number,
+            icon_url: this.props.selection.image.icon_url,
+            volume_id: this.props.selection.volume.id,
+            volume_name: this.props.selection.volume.name,
+            resource_type: this.props.selection.resource_type
+          }
+          this.issueSubmit(thisissue)
         }
-        this.issueSubmit(thisissue)
-      }
-    }//end of if issue
+        else {
+          let thisName = this.props.selection.name
+          let cleanName = (thisName) ? thisName.replace(/'/g,'') : '';
+          let thisissue = {
+            id: this.props.selection.id,
+            name: cleanName,
+            issue_number: this.props.selection.issue_number,
+            icon_url: this.props.selection.image.icon_url,
+            volume_id: this.props.selection.volume_id,
+            volume_name: this.props.selection.volume_name,
+            resource_type: this.props.selection.resource_type
+          }
+          this.issueSubmit(thisissue)
+        }
+      }//end of if issue
+    }//end of if logged in
   }//end of addCollection method
   render() {
     return (
@@ -220,9 +226,10 @@ class ShowDetail extends React.Component {
           </section>
           <footer class="modal-card-foot">
           {(this.props.selection.resource_type == 'character')?
-              <Favorite addCollection={this.addCollection} isOwned={this.props.isOwned}></Favorite> : '' }
+              <Favorite addCollection={this.addCollection} isOwned={this.props.isOwned} toggleState={this.props.toggleState}></Favorite> : '' }
           {(this.props.selection.resource_type == 'issue')?
-            <Collect addCollection={this.addCollection} isOwned={this.props.isOwned}></Collect>
+            <Collect addCollection={this.addCollection} isOwned={this.props.isOwned}
+            toggleState={this.props.toggleState}></Collect>
             : '' }
           </footer>
         </div>
