@@ -31,7 +31,7 @@ class NavBar extends React.Component{
           </div>
           <div class="navbar-end">
             <div class="navbar-item ">
-              <SearchForm grabResults={this.props.grabResults}/>
+              <SearchForm grabResults={this.props.grabResults} parseResults={this.props.parseResults}/>
             </div>
             <div class="navbar-item has-dropdown is-hoverable">
               <a class="navbar-link login">

@@ -11,7 +11,8 @@ class SearchForm extends React.Component {
       .then(response => response.json())
       .then(data => {
         console.log(data);
-        this.props.grabResults(data, query, filter, true)
+        let parsedData = this.props.parseResults(data)
+        this.props.grabResults(parsedData, query, filter, true)
       }).catch(error => console.log(error))
   }
   render(){

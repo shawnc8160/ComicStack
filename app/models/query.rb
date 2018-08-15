@@ -11,9 +11,9 @@ class Query
     def self.find(query, filter, page)
       p "in query class"
       p query
-      #change any filter to none
+      #change any filter to issue, volume, or character
       if filter == 'any'
-        filter = ''
+        filter = 'issue,volume,character'
       end
       #format spaces for url
       queryStr = query.split('')
