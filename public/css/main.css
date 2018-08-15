@@ -7,12 +7,20 @@ body {
 }
 
 /* Nav Bar */
-.login:hover i{
+.login {
+  color: white;
+}
+
+.login:hover i {
   color: rgb(31,195,167);
 }
 
 .logo {
   color: white;
+}
+
+.icon-nav {
+  padding: 0 10px;
 }
 /* app.js css */
 

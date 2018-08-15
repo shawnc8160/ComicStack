@@ -24,14 +24,25 @@ class NavBar extends React.Component{
         </div>
 
         <div id="main-navigation" className={(this.state.navActive) ? "navbar-menu is-active" : "navbar-menu"}>
-          <div class="navbar-start">
-            <a class="navbar-item" href="/">
-              My Collection
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link login">
+              <span class="icon is-large">
+                <i class="far fa-folder-open"></i>
+              </span>
+              My Stuff
             </a>
+            <div class="navbar-dropdown">
+              <a class="navbar-item" onClick={()=> this.props.toggleState('displayCollection')}>
+                <i class="fas fa-book icon-nav"></i>My Comic Collection</a>
+              <a class="navbar-item" onClick={()=> this.props.toggleState('displayFavorites')}>
+                <i class="far fa-user icon-nav"></i>
+                My Favorite Characters</a>
+            </div>
           </div>
           <div class="navbar-end">
             <div class="navbar-item ">
-              <SearchForm grabResults={this.props.grabResults} parseResults={this.props.parseResults}/>
+              <SearchForm grabResults={this.props.grabResults} parseResults={this.props.parseResults}
+              toggleState={this.props.toggleState}/>
             </div>
             <div class="navbar-item has-dropdown is-hoverable">
               <a class="navbar-link login">
