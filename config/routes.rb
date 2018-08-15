@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   #All queries to the comic vine api
+  get    '/queries/pull/:resource_type/:identifier' => 'queries#pull'
   get    '/queries/:query/:filter/:page'      => 'queries#find'
 
   #Character actions
