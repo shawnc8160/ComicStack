@@ -1,4 +1,4 @@
-class Collections extends React.Component {
+class Collection extends React.Component {
   constructor(props) {
     super(props)
     this.getIssue = this.getIssue.bind(this);
@@ -29,17 +29,17 @@ class Collections extends React.Component {
     return (
       <div>
 
-        <h1 class="title">My Favorites</h1>
+        <h1 class="title">My Collection</h1>
         <table class="table is-hoverable is-fullwidth">
           <thead>
             <th></th>
-            <th>Name</th>
+            <th>Title</th>
+            <th>Issue #</th>
             <th>Description</th>
-            <th>Publisher</th>
             <th>Remove</th>
           </thead>
           <tbody>
-            {this.props.issues.map((issue, index) => {
+            {this.props.collection.map((issue, index) => {
               return (
                 <tr>
                   <td className="image-column"> <img onClick={()=>this.getIssue(issue)} className="image is-96x96" src={issue.icon_url}/> </td>
@@ -48,13 +48,15 @@ class Collections extends React.Component {
                       {(issue.volume_name && issue.volume_name.trim().length > 0) ? issue.volume_name : "Unnamed"}
                     </span>
                   </td>
-                  <td className="collections_description_column">
-                    <span className="deck_list">
-                      {(issue.description && issue.description.trim().length > 0) ? <div dangerouslySetInnerHTML={{ __html: issue.description }} /> : "No description available"}
-                    </span>
+                  <td>{(issue.issue_number && issue.issue_number.trim().length > 0) ? issue.issue_number : "Unknown"}</td>
+                  <td>
+                    <div className="description_column">
+                      <span className="deck_list">
+                        {(issue.description && issue.description.trim().length > 0) ? <div dangerouslySetInnerHTML={{ __html: issue.description }} /> : "No description available"}
+                      </span>
+                    </div>
                   </td>
-                  <td>{(issue.publisher && issue.publisher.trim().length > 0) ? issue.publisher : "No publisher available"}</td>
-                  <td><i onClick={() => this.props.deleteFavorite(issue, index)} class="fas fa-trash"></i></td>
+                  <td><i onClick={() => this.props.deleteFromCollection(issue, index)} class="fas fa-trash"></i></td>
                 </tr>
               )
             })}
