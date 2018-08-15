@@ -20,6 +20,7 @@ class FavoritesPage extends React.Component {
   showFavorite(data) {
     console.log('Data in showFavorite', data);
     if (data.results && data.results.length > 0) {
+      data.results[0]['resource_type'] = 'character'
       this.props.setSelection(data.results[0]);
       this.props.toggleState('displayDetails');
     }
