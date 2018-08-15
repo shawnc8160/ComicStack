@@ -12,6 +12,7 @@ class ShowDetail extends React.Component {
   =======================*/
   componentDidMount () {
     if(this.props.user != null) {
+      console.log('Calling componentDidMount in showdetail');
       if(this.props.selection.resource_type == 'character') {
         this.props.checkFaves(this.props.favorites, this.props.selection.id)
       }
