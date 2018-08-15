@@ -7,7 +7,11 @@ class Favorite extends React.Component {
       <div id="favoriteDiv">
         {(this.props.isOwned == false)?   <button id="favoriteBtn" class="button is-primary is-hovered" onClick={this.props.addCollection}>
           ADD TO FAVORITES
-        </button> : <p>this character is owned </p> }
+        </button>
+        :
+        <button id="collectBtn" class="button is-danger is-hovered">
+          FAVORITE CHARACTER
+        </button> }
       </div>
     )
   }
