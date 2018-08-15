@@ -97,6 +97,10 @@ body {
   font-size: 12px;
 }
 
+.image-column {
+  min-width: 120px;
+}
+
 /* ShowDetail Component */
 .showdetail-header-volumes {
   color: rgb(31,195,167);
