@@ -18,6 +18,8 @@ class App extends React.Component {
       displayLogin: false,
       displayRegister: false,
       displayEditProfile: false,
+      displayCollection: false,
+      displayFavorites: false
     }
     this.setUser = this.setUser.bind(this)
     this.getCookieData = this.getCookieData.bind(this)
@@ -38,6 +40,7 @@ class App extends React.Component {
     this.setCollection = this.setCollection.bind(this)
     this.deleteFavorite = this.deleteFavorite.bind(this)
     this.deleteFromCollection = this.deleteFromCollection.bind(this)
+    this.displayList = this.displayList.bind(this)
   }
   /*=======================
   Things to check for when page first loads
@@ -94,7 +97,6 @@ class App extends React.Component {
   getCookieData() {
     console.log('Checking for cookies');
     if(Cookies.get('token') && Cookies.get('id') && Cookies.get('username') && Cookies.get('email')) {
-      console.log('token exists');
       // Format user data
       let userData = {
         username: Cookies.get('username'),
@@ -102,6 +104,7 @@ class App extends React.Component {
         id: Cookies.get('id'),
         token: Cookies.get('token')
       }
+      console.log('Data from cookie:', userData);
       // load user data into state
       this.setState({
         user: userData
@@ -124,7 +127,8 @@ class App extends React.Component {
     Cookies.set('username', userdata['username']);
     Cookies.set('email', userdata['email']);
     Cookies.set('id', userdata['id']);
-    console.log('Cookie is set', Cookies.get('token'));
+    console.log('setUser userData is:', userdata);
+    console.log('setUser id is:', userdata['id']);
     this.setState({
       user: userdata
     });
@@ -215,23 +219,6 @@ class App extends React.Component {
       selection: selection
     });
   }
-
-  /*=======================
-  Sets user data in state and cookies after log in
-  =======================*/
-  setUser(userdata, token) {
-    userdata['token'] = token;
-    console.log('data for user is: ', userdata);
-    // Sets userdata into cookie
-    Cookies.set('token', token);
-    Cookies.set('username', userdata['username']);
-    Cookies.set('email', userdata['email']);
-    Cookies.set('id', userdata['id']);
-    console.log('Cookie is set', Cookies.get('token'));
-    this.setState({
-      user: userdata
-    });
-  }
   /*=======================
   Toggles any of the booleans in state
   =======================*/
@@ -239,14 +226,33 @@ class App extends React.Component {
     console.log('Toggle State called');
     let toUpdate = {}
     for (let key of st) {
+      if (key == 'displayCollection' && this.state.displayCollection == false) {
+        toUpdate['displayFavorites'] = false;
+        toUpdate['displayList'] = false;
+      } else if (key == 'displayFavorites' && this.state.displayFavorites == false) {
+        toUpdate['displayCollection'] = false;
+        toUpdate['displayList'] = false;
+      } else if (key == 'displayList' && this.state.displayList == false) {
+        toUpdate['displayCollection'] = false;
+        toUpdate['displayFavorites'] = false;
+      }
       toUpdate[key] = !this.state[key]
     }
     this.setState(toUpdate)
     this.resetOwn();
   }
-
   /*=======================
-  Toggles any of the booleans in state
+  Shows the results list page (hides everything else)
+  =======================*/
+  displayList() {
+    this.setState({
+      displayList: true,
+      displayCollection: false,
+      displayFavorites: false,
+    })
+  }
+  /*=======================
+  Sets what the current selection is for details page
   =======================*/
   setSelection(selection) {
     this.setState({
@@ -268,6 +274,7 @@ class App extends React.Component {
   Set users favorites
   =======================*/
   setFavorites(favorites) {
+    console.log('Favorites length is:', favorites.results.length);
     if (favorites.results.length > 0) {
       this.setState({
         favorites: favorites.results
@@ -381,6 +388,7 @@ class App extends React.Component {
           logOut={this.logOut}
           toggleState={this.toggleState}
           parseResults={this.parseResults}
+          displayList={this.displayList}
         />
         <div class="container">
           {
@@ -407,6 +415,23 @@ class App extends React.Component {
                 parseResults={this.parseResults}>
                 favorites={this.state.favorites}
               </Rollout>
+          }
+
+          {
+            (this.state.displayCollection)
+            ? <Collection
+              />
+            : null
+          }
+
+          {
+            (this.state.displayFavorites)
+            ? <FavoritesPage
+              favorites={this.state.favorites}
+              setSelection={this.setSelection}
+              toggleState={this.toggleState}
+              />
+            : null
           }
 
           {
