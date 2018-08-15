@@ -16,6 +16,7 @@ class App extends React.Component {
       collection: [],
       displayLogin: false,
       displayRegister: false,
+      displayEditProfile: false,
     }
     this.setUser = this.setUser.bind(this)
     this.getCookieData = this.getCookieData.bind(this)

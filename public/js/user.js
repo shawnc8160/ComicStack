@@ -93,6 +93,11 @@ class User extends React.Component {
           ? <LoginForm handleLogin={this.handleLogin} toggleState={this.props.toggleState}/>
           : null
         }
+        {
+          (this.props.displayEditProfile)
+          ? <LoginForm handleEdit={this.handleEdit} toggleState={this.props.toggleState}/>
+          : null
+        }
       </div>
     )
   }
