@@ -13,16 +13,19 @@ class App extends React.Component {
       displayDetails: false,
       displayList: true,
       favorites: [],
+      isFavorite: false,
       collection: [],
       displayLogin: false,
       displayRegister: false,
     }
     this.setUser = this.setUser.bind(this)
     this.getCookieData = this.getCookieData.bind(this)
+    this.parseResults = this.parseResults.bind(this)
     this.grabResults = this.grabResults.bind(this)
     this.logOut = this.logOut.bind(this)
     this.toggleState = this.toggleState.bind(this)
     this.setSelection = this.setSelection.bind(this)
+    this.checkFaves = this.checkFaves.bind(this)
     this.setPage = this.setPage.bind(this)
     this.favoriteUpdate = this.favoriteUpdate.bind(this)
     this.collectionUpdate = this.collectionUpdate.bind(this)
@@ -35,6 +38,21 @@ class App extends React.Component {
     if (this.state.user == null) {
       // Check for cookie information if they aren't logged in
       this.getCookieData()
+    }
+  }
+  /*=======================
+  checks current usuer's current favorites
+  =======================*/
+  checkFaves (favorites, character_id) {
+    console.log(favorites.length);
+    for (let i = 0; i < favorites.length; i++) {
+      if(favorites[i].id == character_id) {
+        console.log('isFavorite set to true');
+        this.setState({
+          isFavorite: true
+        })
+        break;
+      }
     }
   }
   /*=======================
@@ -58,7 +76,6 @@ class App extends React.Component {
       console.log('token does not exist');
     }
   }
-
   /*=======================
   Sets user data in state and cookies after log in
   =======================*/
@@ -73,6 +90,33 @@ class App extends React.Component {
     this.setState({
       user: userdata
     });
+  }
+  /*=======================
+  grab the results from api calls and update app state
+  =======================*/
+  parseResults(data) {
+    for (let i = 0; i < data.results.length; i++) {
+      //parse images
+      if(data.results[i].image === null) {
+        let newObj = {
+          icon_url: "https://cdn.drawception.com/images/panels/2016/3-3/w4W1XRK4ZO-2.png"
+        }
+        data.results[i].image = newObj;
+      }
+      if(data.results[i].deck === null) {
+        data.results[i].deck = ' ';
+      }
+      if(data.results[i].description === null) {
+        data.results[i].description = ' ';
+      }
+      if(data.results[i].publisher === null) {
+        let newObj = {
+          name: 'Uh Oh.. Data missing'
+        }
+        data.results[i].publisher = newObj;
+      }
+    }
+    return data
   }
   /*=======================
   grab the results from api calls and update app state
@@ -98,7 +142,6 @@ class App extends React.Component {
         filter: filter
       })
     }
-
   }
   /*=======================
   set current page in search results
@@ -197,6 +240,7 @@ class App extends React.Component {
           user={this.state.user}
           logOut={this.logOut}
           toggleState={this.toggleState}
+          parseResults={this.parseResults}
         />
         <div class="container">
           {
@@ -217,7 +261,8 @@ class App extends React.Component {
                 setSelection={this.setSelection}
                 toggleState={this.toggleState}
                 searchPage={this.state.searchPage}
-                setPage={this.setPage}>
+                setPage={this.setPage}
+                parseResults={this.parseResults}>
               </Rollout>
           }
 
@@ -226,7 +271,10 @@ class App extends React.Component {
             ? <ShowDetail
               toggleState={this.toggleState}
               selection={this.state.selection} favorites={this.state.favorites}
-              favoriteUpdate={this.favoriteUpdate} user={this.state.user}
+              favoriteUpdate={this.favoriteUpdate}
+              checkFaves={this.checkFaves}
+              isFavorite={this.state.isFavorite}
+              user={this.state.user}
               collection={this.state.collection}
               collectionUpdate={this.collectionUpdate}
               />

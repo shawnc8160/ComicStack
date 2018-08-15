@@ -8,6 +8,14 @@ class ShowDetail extends React.Component {
     this.ownsSubmit = this.ownsSubmit.bind(this)
   }
   /*=======================
+  once loaded, checks for user ownership
+  =======================*/
+  componentDidMount () {
+    if(this.props.user != null) {
+      this.props.checkFaves(this.props.favorites, this.props.selection.id)
+    }
+  }
+  /*=======================
   submit favorite linking table to characters in the database
   =======================*/
   favoriteSubmit (newFave) {
@@ -207,8 +215,7 @@ class ShowDetail extends React.Component {
           </section>
           <footer class="modal-card-foot">
           {(this.props.selection.resource_type == 'character')?
-            <Favorite addCollection={this.addCollection}></Favorite>
-            : '' }
+              <Favorite addCollection={this.addCollection} isFavorite={this.props.isFavorite}></Favorite> : '' }
           {(this.props.selection.resource_type == 'issue')?
             <Collect addCollection={this.addCollection}></Collect>
             : '' }
