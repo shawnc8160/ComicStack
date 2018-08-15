@@ -430,6 +430,7 @@ class App extends React.Component {
               favorites={this.state.favorites}
               setSelection={this.setSelection}
               toggleState={this.toggleState}
+              deleteFavorite={this.deleteFavorite}
               />
             : null
           }
