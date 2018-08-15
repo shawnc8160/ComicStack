@@ -12,7 +12,12 @@ class ShowDetail extends React.Component {
   =======================*/
   componentDidMount () {
     if(this.props.user != null) {
-      this.props.checkFaves(this.props.favorites, this.props.selection.id)
+      if(this.props.selection.resource_type == 'character') {
+        this.props.checkFaves(this.props.favorites, this.props.selection.id)
+      }
+      else if (this.props.selection.resource_type == 'issue') {
+        this.props.checkCollection(this.props.collection, this.props.selection.id)
+      }
     }
   }
   /*=======================
@@ -215,9 +220,9 @@ class ShowDetail extends React.Component {
           </section>
           <footer class="modal-card-foot">
           {(this.props.selection.resource_type == 'character')?
-              <Favorite addCollection={this.addCollection} isFavorite={this.props.isFavorite}></Favorite> : '' }
+              <Favorite addCollection={this.addCollection} isOwned={this.props.isOwned}></Favorite> : '' }
           {(this.props.selection.resource_type == 'issue')?
-            <Collect addCollection={this.addCollection}></Collect>
+            <Collect addCollection={this.addCollection} isOwned={this.props.isOwned}></Collect>
             : '' }
           </footer>
         </div>
