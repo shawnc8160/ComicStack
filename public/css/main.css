@@ -155,7 +155,13 @@ animation-direction: alternate;
 #results {
   font-size: 1.4em;
 }
+#skipper {
+
+}
 /* Rollout component */
+#rollout {
+  margin-top: 90px;
+}
 .results-container {
   display: flex;
   flex-wrap: wrap;
