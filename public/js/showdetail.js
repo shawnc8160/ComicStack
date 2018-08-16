@@ -201,7 +201,8 @@ class ShowDetail extends React.Component {
 
               {
                 (this.props.selection.resource_type=="issue")
-                ? <div class="modal-card-title"><span class="icon is-small showdetail-header-issues"><i class="fas fa-book"></i></span><span class="showdetail-header-issues">&nbsp;Issue</span><h1 class="title modal-title-container"> {this.props.selection.name}</h1></div>
+                ? <div class="modal-card-title"><span class="icon is-small showdetail-header-issues"><i class="fas fa-book"></i></span><span class="showdetail-header-issues">&nbsp;Issue</span><h1 class="title modal-title-container">
+                {(this.props.selection.volume) ? this.props.selection.volume.name : this.props.selection.volume_name}&nbsp;{this.props.selection.issue_number}</h1></div>
                 : (this.props.selection.resource_type=="character")
                   ? <div class="modal-card-title"><span class="icon is-small showdetail-header-characters"><i class="far fa-user"></i></span><span class="showdetail-header-characters">&nbsp;Character</span><h1 class="title modal-title-container"> {this.props.selection.name}</h1></div>
                   : <div class="modal-card-title"><span class="icon is-small showdetail-header-volumesr"><i class="fas fa-book-reader"></i></span><span class="showdetail-header-volumes">&nbsp;Volume</span><h1 class="title modal-title-container"> {this.props.selection.name}</h1></div>
@@ -213,7 +214,8 @@ class ShowDetail extends React.Component {
             <div class="show-detail-info">
               {
                 (this.props.selection.resource_type=="issue")
-                ? <div class="show-detail-section"><h2 class="show-detail-label">Cover Date</h2><span>{this.props.selection.cover_date}</span></div>
+                ?<div><div class="show-detail-section"><h2 class="show-detail-label">Subtitle</h2><span>{this.props.selection.name}</span></div>
+                <div class="show-detail-section"><h2 class="show-detail-label">Cover Date</h2><span>{this.props.selection.cover_date}</span></div></div>
                 : (this.props.selection.resource_type=="character")
                   ? <div class="show-detail-section"><h2 class="show-detail-label">Real Name</h2><span>{this.props.selection.real_name}</span></div>
                   : <div class="show-detail-section"><h2 class="show-detail-label">Start Year</h2><span>{this.props.selection.start_year}</span></div>
