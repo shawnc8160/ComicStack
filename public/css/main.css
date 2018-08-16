@@ -185,7 +185,6 @@ animation-direction: alternate;
 .image-column {
   min-width: 120px;
 }
-<<<<<<< HEAD
 
 /* Collections list */
 .description_column {
@@ -193,11 +192,10 @@ animation-direction: alternate;
   overflow: scroll;
 }
 
-=======
+
 .colName {
   min-width: 140px;
 }
->>>>>>> 50c4b2941fcc6331505e476030e075e518f7649a
 /* ShowDetail Component */
 .showdetail-header-volumes {
   color: rgb(31,195,167);
@@ -237,5 +235,5 @@ animation-direction: alternate;
 .modal-title-container {
   max-width: 550px;
   max-height: 120px;
-  overflow: scroll;
+  overflow: hidden;
 }

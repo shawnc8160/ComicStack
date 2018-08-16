@@ -201,10 +201,10 @@ class ShowDetail extends React.Component {
 
               {
                 (this.props.selection.resource_type=="issue")
-                ? <div class="modal-card-title"><span class="icon is-small showdetail-header-issues"><i class="fas fa-book"></i></span><span class="showdetail-header-issues">Issue</span><h1 class="title modal-title-container"> {this.props.selection.name}</h1></div>
+                ? <div class="modal-card-title"><span class="icon is-small showdetail-header-issues"><i class="fas fa-book"></i></span><span class="showdetail-header-issues">&nbsp;Issue</span><h1 class="title modal-title-container"> {this.props.selection.name}</h1></div>
                 : (this.props.selection.resource_type=="character")
-                  ? <div class="modal-card-title"><span class="icon is-small showdetail-header-characters"><i class="far fa-user"></i></span><span class="showdetail-header-characters">Character</span><h1 class="title modal-title-container"> {this.props.selection.name}</h1></div>
-                  : <div class="modal-card-title"><span class="icon is-small showdetail-header-volumesr"><i class="fas fa-book-reader"></i></span><span class="showdetail-header-volumes">Volume</span><h1 class="title modal-title-container"> {this.props.selection.name}</h1></div>
+                  ? <div class="modal-card-title"><span class="icon is-small showdetail-header-characters"><i class="far fa-user"></i></span><span class="showdetail-header-characters">&nbsp;Character</span><h1 class="title modal-title-container"> {this.props.selection.name}</h1></div>
+                  : <div class="modal-card-title"><span class="icon is-small showdetail-header-volumesr"><i class="fas fa-book-reader"></i></span><span class="showdetail-header-volumes">&nbsp;Volume</span><h1 class="title modal-title-container"> {this.props.selection.name}</h1></div>
               }
             <button class="delete" aria-label="close" onClick={() => this.props.toggleState('displayDetails')}></button>
           </header>
