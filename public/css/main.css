@@ -234,6 +234,6 @@ animation-direction: alternate;
 
 .modal-title-container {
   max-width: 550px;
-  max-height: 120px;
+  max-height: 200px;
   overflow: hidden;
 }
