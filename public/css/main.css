@@ -1,9 +1,92 @@
-/* body/main css */
 body {
+  max-width: 80%;
+  background-color: white;
+  margin: auto;
+}
 
+@font-face {
+   font-family: 'watchmen';
+   src: url('../fonts/--wATCHMEn--.ttf');
 }
 .container {
   margin-top: 80px;
+}
+
+#cf {
+  width: 800px;
+  position:relative;
+  margin: auto;
+}
+
+.main-content {
+  position: absolute;
+  top: 375px;
+  left: 40px;
+  z-index: 2;
+}
+
+.mainsearch {
+  position: absolute;
+  z-index: 3;
+  top: 555px;
+  left: -15px;
+}
+.searchbardiv {
+  border-radius: 10px;
+  border: 5px solid black;
+}
+.mainsearchinput {
+  width: 350px;
+}
+
+.maintitle {
+  position: absolute;
+  font-family: 'watchmen';
+  font-size: 4.5em;
+  color: black;
+  z-index: 2;
+  top: 350px;
+  left: -40px;
+  text-shadow:3px 3px 2px rgba(255,255,255,0),2px 2px 0px rgba(255,255,255,1);
+}
+
+.main-wrapper {
+  margin: 100px auto;
+  width: 700px;
+}
+
+#cf img {
+  border: 5px solid black;
+  border-radius: 50%;
+  position: absolute;
+  left: 25px;
+  -webkit-transition: opacity 1s ease-in-out;
+  -moz-transition: opacity 1s ease-in-out;
+  -o-transition: opacity 1s ease-in-out;
+  transition: opacity 1s ease-in-out;
+}
+
+@keyframes cf3FadeInOut {
+  0% {
+    opacity:1;
+  }
+  25% {
+    opacity:.0;
+  }
+  75% {
+    opacity:.0;
+  }
+  100% {
+    opacity:1;
+  }
+}
+
+#cf img.top {
+animation-name: cf3FadeInOut;
+animation-timing-function: ease-in-out;
+animation-iteration-count: infinite;
+animation-duration: 15s;
+animation-direction: alternate;
 }
 
 /* Nav Bar */
@@ -91,6 +174,8 @@ body {
   font-size: 20px;
   padding: 0 20px;
   cursor: pointer;
+  min-width: 140px;
+  padding:0px;
 }
 
 .deck_list {
@@ -100,6 +185,7 @@ body {
 .image-column {
   min-width: 120px;
 }
+<<<<<<< HEAD
 
 /* Collections list */
 .description_column {
@@ -107,6 +193,11 @@ body {
   overflow: scroll;
 }
 
+=======
+.colName {
+  min-width: 140px;
+}
+>>>>>>> 50c4b2941fcc6331505e476030e075e518f7649a
 /* ShowDetail Component */
 .showdetail-header-volumes {
   color: rgb(31,195,167);

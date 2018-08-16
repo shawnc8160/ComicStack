@@ -19,7 +19,8 @@ class App extends React.Component {
       displayRegister: false,
       displayEditProfile: false,
       displayCollection: false,
-      displayFavorites: false
+      displayFavorites: false,
+      displayMain: true
     }
     this.setUser = this.setUser.bind(this)
     this.getCookieData = this.getCookieData.bind(this)
@@ -255,6 +256,7 @@ class App extends React.Component {
       displayList: true,
       displayCollection: false,
       displayFavorites: false,
+      displayMain: false
     })
   }
   /*=======================
@@ -388,7 +390,16 @@ class App extends React.Component {
   render () {
     return (
       <div>
-
+        {
+          (this.state.displayMain)
+          ? <Main grabResults={this.grabResults}
+            user={this.state.user}
+            logOut={this.logOut}
+            toggleState={this.toggleState}
+            parseResults={this.parseResults}
+            displayList={this.displayList}/>
+          : null
+        }
         <NavBar
           grabResults={this.grabResults}
           user={this.state.user}
@@ -405,6 +416,7 @@ class App extends React.Component {
             logOut={this.logOut}/>
             : null
           }
+
           {
             (this.state.searchResults == null || this.state.displayList==false)
             ? ''

@@ -1,4 +1,4 @@
-class SearchForm extends React.Component {
+class MainSearchForm extends React.Component {
   constructor(props) {
     super(props)
     this.getResults = this.getResults.bind(this)
@@ -17,11 +17,11 @@ class SearchForm extends React.Component {
       }).catch(error => console.log(error))
   }
   render(){
-    return (<div id="searchFormDiv">
+    return (<div class="mainsearch" id="searchFormDiv">
     <form onSubmit={this.getResults}>
-      <div id="searchBar" className="field has-addons has-addons-centered">
+      <div id="searchBar" className="field has-addons has-addons-centered searchbardiv">
         <p class="control">
-          <span class="select">
+          <span class="select is-large">
             <select ref="filter">
               <option value="any" selected>All</option>
               <option value="issue">Issues</option>
@@ -31,11 +31,11 @@ class SearchForm extends React.Component {
           </span>
         </p>
         <p class="control">
-          <input className="input"
+          <input className="input is-large mainsearchinput"
             ref="query" type="text" placeholder="Search for comic or character" />
         </p>
         <p class="control">
-          <input className="button is-danger is-hovered" type="submit" value="Search" />
+          <input className="button is-large is-danger is-hovered" type="submit" value="Search" />
         </p>
       </div>
     </form>
