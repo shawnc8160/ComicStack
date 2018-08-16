@@ -91,6 +91,8 @@ body {
   font-size: 20px;
   padding: 0 20px;
   cursor: pointer;
+  min-width: 140px;
+  padding:0px;
 }
 
 .deck_list {
@@ -100,7 +102,9 @@ body {
 .image-column {
   min-width: 120px;
 }
-
+.colName {
+  min-width: 140px;
+}
 /* ShowDetail Component */
 .showdetail-header-volumes {
   color: rgb(31,195,167);

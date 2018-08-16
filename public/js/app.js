@@ -371,7 +371,7 @@ class App extends React.Component {
     else {
       thisID = issue.id
     }
-    fetch('issues/' + thisID,
+    fetch('owns/' + thisID,
       {
         method: 'DELETE'
       })
