@@ -236,12 +236,15 @@ class App extends React.Component {
       if (key == 'displayCollection' && this.state.displayCollection == false) {
         toUpdate['displayFavorites'] = false;
         toUpdate['displayList'] = false;
+        toUpdate['displayMain'] = false;
       } else if (key == 'displayFavorites' && this.state.displayFavorites == false) {
         toUpdate['displayCollection'] = false;
         toUpdate['displayList'] = false;
+        toUpdate['displayMain'] = false;
       } else if (key == 'displayList' && this.state.displayList == false) {
         toUpdate['displayCollection'] = false;
         toUpdate['displayFavorites'] = false;
+        toUpdate['displayMain'] = false;
       }
       toUpdate[key] = !this.state[key]
     }
