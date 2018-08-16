@@ -10,7 +10,7 @@ class NavBar extends React.Component{
       <nav class="navbar is-fixed-top is-dark" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
           <a class="navbar-item" href="/">
-            <h1 class="title is-4 logo"> ComicStack </h1>
+            <h1 class="title is-4 logo"> --cOMIC STACK--</h1>
           </a>
           <div class="navbar-burger burger" data-target="main-navigation" onClick={() => {
               this.setState({
@@ -24,14 +24,26 @@ class NavBar extends React.Component{
         </div>
 
         <div id="main-navigation" className={(this.state.navActive) ? "navbar-menu is-active" : "navbar-menu"}>
-          <div class="navbar-start">
-            <a class="navbar-item" href="/">
-              My Collection
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link login">
+              <span class="icon is-large">
+                <i class="far fa-folder-open"></i>
+              </span>
+              My Stuff
             </a>
+            <div class="navbar-dropdown">
+              <a class="navbar-item" onClick={()=> this.props.toggleState('displayCollection')}>
+                <i class="fas fa-book icon-nav"></i>My Comic Collection</a>
+              <a class="navbar-item" onClick={()=> this.props.toggleState('displayFavorites')}>
+                <i class="far fa-user icon-nav"></i>
+                My Favorite Characters</a>
+            </div>
           </div>
           <div class="navbar-end">
             <div class="navbar-item ">
-              <SearchForm grabResults={this.props.grabResults}/>
+              <SearchForm grabResults={this.props.grabResults} parseResults={this.props.parseResults}
+              toggleState={this.props.toggleState}
+              displayList={this.props.displayList}/>
             </div>
             <div class="navbar-item has-dropdown is-hoverable">
               <a class="navbar-link login">
@@ -43,6 +55,7 @@ class NavBar extends React.Component{
                 {
                   (this.props.user != null)
                   ? <div class="navbar-dropdown">
+                      <a class="navbar-item" onClick={()=> this.props.toggleState('displayEditProfile')}>Edit Profile</a>
                       <a class="navbar-item" onClick={()=> this.props.logOut()}>Logout</a>
                     </div>
                   : <div class="navbar-dropdown">

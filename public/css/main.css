@@ -1,24 +1,123 @@
-/* body/main css */
 body {
+  max-width: 80%;
+  background-color: white;
+  margin: auto;
+}
 
+@font-face {
+   font-family: 'watchmen';
+   src: url('../fonts/--wATCHMEn--.ttf');
 }
 .container {
   margin-top: 80px;
 }
 
+#cf {
+  width: 800px;
+  position:relative;
+  margin: auto;
+}
+
+.main-content {
+  position: absolute;
+  top: 375px;
+  left: 40px;
+  z-index: 2;
+}
+
+.mainsearch {
+  position: absolute;
+  z-index: 3;
+  top: 555px;
+  left: -15px;
+}
+.searchbardiv {
+  border-radius: 10px;
+  border: 5px solid black;
+}
+.mainsearchinput {
+  width: 350px;
+}
+
+.maintitle {
+  position: absolute;
+  font-family: 'watchmen';
+  font-size: 4.5em;
+  color: black;
+  z-index: 2;
+  top: 350px;
+  left: -40px;
+  text-shadow:3px 3px 2px rgba(255,255,255,0),2px 2px 0px rgba(255,255,255,1);
+}
+
+.main-wrapper {
+  margin: 100px auto;
+  width: 700px;
+}
+
+#cf img {
+  border: 5px solid black;
+  border-radius: 50%;
+  position: absolute;
+  left: 25px;
+  -webkit-transition: opacity 1s ease-in-out;
+  -moz-transition: opacity 1s ease-in-out;
+  -o-transition: opacity 1s ease-in-out;
+  transition: opacity 1s ease-in-out;
+}
+
+@keyframes cf3FadeInOut {
+  0% {
+    opacity:1;
+  }
+  25% {
+    opacity:.0;
+  }
+  75% {
+    opacity:.0;
+  }
+  100% {
+    opacity:1;
+  }
+}
+
+#cf img.top {
+animation-name: cf3FadeInOut;
+animation-timing-function: ease-in-out;
+animation-iteration-count: infinite;
+animation-duration: 15s;
+animation-direction: alternate;
+}
+
 /* Nav Bar */
-.login:hover i{
+.login {
+  color: white;
+}
+
+.login:hover i {
   color: rgb(31,195,167);
 }
 
 .logo {
   color: white;
+  font-family: 'watchmen';
+  text-shadow:1px 1px 1px rgba(0,0,0,1);
+  padding-left: 10px;
+}
+
+.icon-nav {
+  padding: 0 10px;
 }
 /* app.js css */
 
 /* User component */
 
 /* LoginForm component */
+.form {
+  padding: 10%;
+  border: 1px solid lightgrey;
+  background: rgb(255, 255, 255);
+}
 
 /* RegisterForm component */
 
@@ -61,12 +160,47 @@ body {
 .result-thumbnail {
   float:right;
   margin: 10px;
+  max-width: 80px;
+  max-height: 80px;
 }
 /* Favorite component */
 #favoriteDiv{
   /* formatted to view purposes in development. need to change on final */
 }
 
+/* Favorites List */
+.icon_list {
+  height: 75px;
+  width: 75px;
+  cursor: pointer;
+}
+
+.name_list {
+  font-size: 20px;
+  padding: 0 20px;
+  cursor: pointer;
+  min-width: 140px;
+  padding:0px;
+}
+
+.deck_list {
+  font-size: 12px;
+}
+
+.image-column {
+  min-width: 120px;
+}
+
+/* Collections list */
+.description_column {
+  max-height: 200px;
+  overflow: scroll;
+}
+
+
+.colName {
+  min-width: 140px;
+}
 /* ShowDetail Component */
 .showdetail-header-volumes {
   color: rgb(31,195,167);
@@ -101,4 +235,10 @@ body {
 .show-detail-section {
   margin: 10px;
   margin-bottom: 15px;
+}
+
+.modal-title-container {
+  max-width: 550px;
+  max-height: 200px;
+  overflow: hidden;
 }
