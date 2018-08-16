@@ -256,6 +256,7 @@ class App extends React.Component {
       displayList: true,
       displayCollection: false,
       displayFavorites: false,
+      displayMain: false
     })
   }
   /*=======================
