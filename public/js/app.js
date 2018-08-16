@@ -389,7 +389,16 @@ class App extends React.Component {
   render () {
     return (
       <div>
-
+        {
+          (this.state.displayMain)
+          ? <Main grabResults={this.grabResults}
+            user={this.state.user}
+            logOut={this.logOut}
+            toggleState={this.toggleState}
+            parseResults={this.parseResults}
+            displayList={this.displayList}/>
+          : null
+        }
         <NavBar
           grabResults={this.grabResults}
           user={this.state.user}
@@ -406,11 +415,7 @@ class App extends React.Component {
             logOut={this.logOut}/>
             : null
           }
-          {
-            (this.state.displayMain)
-            ? <Main />
-            : null
-          }
+
           {
             (this.state.searchResults == null || this.state.displayList==false)
             ? ''
