@@ -1,30 +1,56 @@
+body {
+  max-width: 80%;
+  background-color: white;
+  margin: auto;
+}
 
+@font-face {
+   font-family: 'watchmen';
+   src: url('../fonts/--wATCHMEn--.ttf');
+}
 .container {
   margin-top: 80px;
 }
 
 #cf {
+  width: 800px;
   position:relative;
-  margin:0 auto;
+  margin: auto;
 }
 
 .main-content {
   position: absolute;
-  left: 0px;
   top: 375px;
+  left: 40px;
   z-index: 2;
 }
 
-.main-content > h1 {
-  font-size: 5em;
-  color: rgb(54,54,54);
+.mainsearch {
+  position: absolute;
+  z-index: 3;
+  top: 550px;
+}
+.maintitle {
+  position: absolute;
+  font-family: 'watchmen';
+  font-size: 4.5em;
+  color: black;
+  z-index: 2;
+  top: 350px;
+  left: -40px;
+  text-shadow:3px 3px 2px rgba(255,255,255,0),2px 2px 0px rgba(255,255,255,1);
+}
+
+.main-wrapper {
+  margin: 100px auto;
+  width: 700px;
 }
 
 #cf img {
   border: 5px solid black;
   border-radius: 50%;
   position: absolute;
-  left: 50px;
+  left: 25px;
   -webkit-transition: opacity 1s ease-in-out;
   -moz-transition: opacity 1s ease-in-out;
   -o-transition: opacity 1s ease-in-out;
