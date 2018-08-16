@@ -28,8 +28,17 @@ body {
 .mainsearch {
   position: absolute;
   z-index: 3;
-  top: 550px;
+  top: 555px;
+  left: -15px;
 }
+.searchbardiv {
+  border-radius: 10px;
+  border: 5px solid black;
+}
+.mainsearchinput {
+  width: 350px;
+}
+
 .maintitle {
   position: absolute;
   font-family: 'watchmen';
@@ -224,6 +233,6 @@ animation-direction: alternate;
 
 .modal-title-container {
   max-width: 550px;
-  max-height: 120px;
-  overflow: scroll;
+  max-height: 200px;
+  overflow: hidden;
 }
