@@ -19,7 +19,8 @@ class App extends React.Component {
       displayRegister: false,
       displayEditProfile: false,
       displayCollection: false,
-      displayFavorites: false
+      displayFavorites: false,
+      displayMain: true
     }
     this.setUser = this.setUser.bind(this)
     this.getCookieData = this.getCookieData.bind(this)
@@ -403,6 +404,11 @@ class App extends React.Component {
             ? <User setUser={this.setUser} displayLogin={this.state.displayLogin} displayRegister={this.state.displayRegister} displayEditProfile={this.state.displayEditProfile} toggleState={this.toggleState}
             userData={this.state.user}
             logOut={this.logOut}/>
+            : null
+          }
+          {
+            (this.state.displayMain)
+            ? <Main />
             : null
           }
           {

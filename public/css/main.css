@@ -1,9 +1,57 @@
-/* body/main css */
-body {
 
-}
 .container {
   margin-top: 80px;
+}
+
+#cf {
+  position:relative;
+  margin:0 auto;
+}
+
+.main-content {
+  position: absolute;
+  left: 0px;
+  top: 375px;
+  z-index: 2;
+}
+
+.main-content > h1 {
+  font-size: 5em;
+  color: rgb(54,54,54);
+}
+
+#cf img {
+  border: 5px solid black;
+  border-radius: 50%;
+  position: absolute;
+  left: 50px;
+  -webkit-transition: opacity 1s ease-in-out;
+  -moz-transition: opacity 1s ease-in-out;
+  -o-transition: opacity 1s ease-in-out;
+  transition: opacity 1s ease-in-out;
+}
+
+@keyframes cf3FadeInOut {
+  0% {
+    opacity:1;
+  }
+  25% {
+    opacity:.0;
+  }
+  75% {
+    opacity:.0;
+  }
+  100% {
+    opacity:1;
+  }
+}
+
+#cf img.top {
+animation-name: cf3FadeInOut;
+animation-timing-function: ease-in-out;
+animation-iteration-count: infinite;
+animation-duration: 15s;
+animation-direction: alternate;
 }
 
 /* Nav Bar */
