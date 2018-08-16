@@ -35,7 +35,7 @@ class SearchForm extends React.Component {
             ref="query" type="text" placeholder="Search for comic or character" />
         </p>
         <p class="control">
-          <input className="button is-primary is-hovered" type="submit" value="Search" />
+          <input className="button is-danger is-hovered" type="submit" value="Search" />
         </p>
       </div>
     </form>

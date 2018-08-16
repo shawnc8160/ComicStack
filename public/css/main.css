@@ -28,8 +28,17 @@ body {
 .mainsearch {
   position: absolute;
   z-index: 3;
-  top: 550px;
+  top: 555px;
+  left: -15px;
 }
+.searchbardiv {
+  border-radius: 10px;
+  border: 5px solid black;
+}
+.mainsearchinput {
+  width: 350px;
+}
+
 .maintitle {
   position: absolute;
   font-family: 'watchmen';
