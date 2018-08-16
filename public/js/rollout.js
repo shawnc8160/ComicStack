@@ -49,15 +49,19 @@ class Rollout extends React.Component {
   render () {
     return (
       <div id="rollout">
-        <h1>Results: {this.props.searchCount}</h1>
+        <h1 id="results">Results: {this.props.searchCount}</h1>
         <div id="pageCount">
-          Page: {(this.props.searchPage > 1)? <a href="#" id="back" onClick={this.paginate}> &lt; </a> : ''} {this.props.searchPage} of {this.props.pages} {(this.props.searchPage < this.props.pages)? <a id="next" href="#" onClick={this.paginate}> &gt; </a> : ''}
+          <div id="stepper">
+          Page: {(this.props.searchPage > 1)? <button className="button is-primary" href="#" id="back" onClick={this.paginate}> Prev </button> : ''} {this.props.searchPage} of {this.props.pages} {(this.props.searchPage < this.props.pages)? <button className="button is-primary" id="next" href="#" onClick={this.paginate}> Next </button> : ''}
+          </div>
           <form id="topSkipper" onSubmit={this.skipToPage}>
             <div id="skipBar">
-              <label for="pager">Skip to Page #:</label>
-              <input
+              <h1>Skip to Page #: &nbsp;</h1>
+              <div id="skipInDiv">
+              <input className="input" id="pagerIn"
                 ref="toppager" id="pager" type="number" min="1" max={this.props.pages} placeholder="Page number:" />
-              <input type="submit" value="Jump" />
+              </div>
+              <button type="submit" className="button is-danger" id="jumpButton" value="Jump">Jump</button>
             </div>
           </form>
         </div>
@@ -111,19 +115,21 @@ class Rollout extends React.Component {
              </div>)//result div return
            })}
       </div>
-          <div id="pageCount">
-            <div id="pagerDiv">
-            Page: {(this.props.searchPage > 1)? <a href="#" id="back" onClick={this.paginate}> &lt; </a> : ''}{this.props.searchPage} of {this.props.pages} {(this.props.searchPage < this.props.pages)? <a id="next" href="#" onClick={this.paginate}> &gt; </a> : ''}
+      <div id="pageCount">
+        <div id="stepper">
+        Page: {(this.props.searchPage > 1)? <button className="button is-primary" href="#" id="back" onClick={this.paginate}> Prev </button> : ''} {this.props.searchPage} of {this.props.pages} {(this.props.searchPage < this.props.pages)? <button className="button is-primary" id="next" href="#" onClick={this.paginate}> Next </button> : ''}
+        </div>
+        <form id="skipper" onSubmit={this.skipToPage}>
+          <div id="skipBar">
+            <h1>Skip to Page #: &nbsp;</h1>
+            <div id="skipInDiv">
+            <input className="input" id="pagerIn"
+              ref="pager" id="pager" type="number" min="1" max={this.props.pages} placeholder="Page number:" />
             </div>
-            <form id="skipper" onSubmit={this.skipToPage}>
-              <div id="skipBar">
-                <label for="pager">Skip to Page #:</label>
-                <input
-                  ref="pager" id="pager" type="number" min="1" max={this.props.pages} placeholder="Page number:" />
-                <input type="submit" value="Jump" />
-              </div>
-            </form>
-            </div>
+            <button type="submit" className="button is-danger" id="jumpButton" value="Jump">Jump</button>
+          </div>
+        </form>
+        </div>
           </div>
 
     )
