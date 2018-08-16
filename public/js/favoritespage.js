@@ -44,7 +44,7 @@ class FavoritesPage extends React.Component {
               return (
                 <tr>
                   <td className="image-column"> <img onClick={()=>this.getFavorite(favorite)} className="image is-96x96" src={favorite.icon_url}/> </td>
-                  <td>
+                  <td className="colName">
                     <span className="name_list" onClick={()=>this.getFavorite(favorite)}>
                       {(favorite.name && favorite.name.trim().length > 0) ? favorite.name : "Unnamed"}
                     </span>
