@@ -100,6 +100,9 @@ animation-direction: alternate;
 
 .logo {
   color: white;
+  font-family: 'watchmen';
+  text-shadow:1px 1px 1px rgba(0,0,0,1);
+  padding-left: 10px;
 }
 
 .icon-nav {
@@ -157,6 +160,8 @@ animation-direction: alternate;
 .result-thumbnail {
   float:right;
   margin: 10px;
+  max-width: 80px;
+  max-height: 80px;
 }
 /* Favorite component */
 #favoriteDiv{
@@ -188,7 +193,7 @@ animation-direction: alternate;
 
 /* Collections list */
 .description_column {
-  max-height: 100px;
+  max-height: 200px;
   overflow: scroll;
 }
 

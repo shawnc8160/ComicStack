@@ -48,7 +48,7 @@ class Collection extends React.Component {
                       {(issue.volume_name && issue.volume_name.trim().length > 0) ? issue.volume_name : "Unnamed"}
                     </span>
                   </td>
-                  <td>{(issue.issue_number && issue.issue_number.trim().length > 0) ? issue.issue_number : "Unknown"}</td>
+                  <td>{(issue.issue_number) ? issue.issue_number : "Unknown"}</td>
                   <td>
                     <div className="description_column">
                       <span className="deck_list">

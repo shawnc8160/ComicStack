@@ -55,14 +55,15 @@ class LoginForm extends React.Component {
                 </span>
               </p>
             </div>
-            <div class='field'>
+          </div>
+        </div>
+            <div class='field is-grouped is-grouped-right'>
               <p class="control">
                 <input class="button is-success" type="submit"/>
                 <button onClick={()=> this.props.toggleState('displayLogin')} class="button is-danger">Cancel</button>
               </p>
             </div>
-          </div>
-        </div>
+
       </form>
     </div>
     <button onClick={()=> this.props.toggleState('displayLogin')} class="modal-close is-large" aria-label="close"></button>

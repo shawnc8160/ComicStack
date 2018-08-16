@@ -63,14 +63,15 @@ class EditForm extends React.Component {
                 </span>
               </p>
             </div>
-            <div class='field'>
+          </div>
+        </div>
+            <div class='field is-grouped is-grouped-right'>
               <p class="control">
                 <input class="button is-success" type="submit"/>
                 <button onClick={()=> this.props.toggleState('displayEditProfile')} class="button is-danger">Cancel</button>
               </p>
             </div>
-          </div>
-        </div>
+
         <a class="button is-danger" onClick={()=>{this.props.toggleState('displayEditProfile'); this.props.handleDelete()}}>Delete My Account</a>
       </form>
     </div>

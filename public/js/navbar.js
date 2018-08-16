@@ -10,7 +10,7 @@ class NavBar extends React.Component{
       <nav class="navbar is-fixed-top is-dark" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
           <a class="navbar-item" href="/">
-            <h1 class="title is-4 logo"> ComicStack </h1>
+            <h1 class="title is-4 logo"> --cOMIC STACK--</h1>
           </a>
           <div class="navbar-burger burger" data-target="main-navigation" onClick={() => {
               this.setState({
