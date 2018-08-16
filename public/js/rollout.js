@@ -56,7 +56,7 @@ class Rollout extends React.Component {
           </div>
           <form id="topSkipper" onSubmit={this.skipToPage}>
             <div id="skipBar">
-              <h1>Skip to Page #:</h1>
+              <h1>Skip to Page #: &nbsp;</h1>
               <div id="skipInDiv">
               <input className="input" id="pagerIn"
                 ref="toppager" id="pager" type="number" min="1" max={this.props.pages} placeholder="Page number:" />
@@ -121,7 +121,7 @@ class Rollout extends React.Component {
         </div>
         <form id="skipper" onSubmit={this.skipToPage}>
           <div id="skipBar">
-            <h1>Skip to Page #:</h1>
+            <h1>Skip to Page #: &nbsp;</h1>
             <div id="skipInDiv">
             <input className="input" id="pagerIn"
               ref="pager" id="pager" type="number" min="1" max={this.props.pages} placeholder="Page number:" />
